@@ -1,0 +1,93 @@
+
+/* Reset cơ bản */
+body {
+      padding-top: 80px;
+    }
+    .nav-link { font-weight: 500; }
+    .btn-auth { font-weight: bold; margin-left: 10px; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Các liên kết nav */
+.navbar-nav .nav-link {
+  color: #222; 
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff; 
+  text-shadow: 0 0 2px rgba(0, 123, 255, 0.4);
+}
+
+.navbar-nav .nav-link.active {
+  color: #d63384;
+  font-weight: 700;
+}
+
+/* Logo */
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgb(14, 139, 69);
+  margin-right: 10px;
+}
+
+/* Button đăng nhập/đăng ký/đăng xuất */
+.btn-auth {
+  font-weight: bold;
+  margin-left: 10px;
+}
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  margin-right: 10px; /* khoảng cách giữa các icon */
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.icon-btn .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.icon-btn .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}

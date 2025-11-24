@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang chủ</title>
-    <link rel="stylesheet" href="css/styletrangchu.css" />
+    <link rel="stylesheet" href="../../../public/css/index.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap"
       rel="stylesheet"
@@ -36,7 +36,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <?php include('Webpet-2/View/menu.php'); ?>
+    <?php include('../layout/menu.php'); ?>
     <header class="hero">
       <div class="hero-text"></div>
     </header>
@@ -250,11 +250,11 @@
           </div>
         </div>
         <div class="read-more">
-          <a href="#">ĐỌC THÊM</a>
+          <a href="discover.php">ĐỌC THÊM</a>
         </div>
       </div>
     </section>
-    <?php include('Webpet-2/View/footer.php'); ?>
-    <script src="scripts/main.js"></script>
+    <?php include('../layout/footer.php'); ?>
+    <script src="../../../public/scripts/main.js"></script>
   </body>
 </html>

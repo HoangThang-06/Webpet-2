@@ -1,6 +1,6 @@
 <?php
 
-class Article
+class ArticleDTO
 {
     private $id_article;
     private $title;

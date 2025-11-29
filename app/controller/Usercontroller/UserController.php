@@ -21,8 +21,35 @@ class UserController{
         $user->setPassword($password);
         $user->setRole($role);
         $user->setEmail($email);
+        if($role=="admin"){
+            $status="disapproved";
+            $user->setStatus($status);
+        }
+        else{
+            $status="approved";
+            $user->setStatus($status);
+        }
 
         return $this->userDAO->addUser($user)?"Dang ky thanh cong":"Dang ky that bai";
+    }
+
+    public function login($username,$password){
+        $user = $this->userDAO->getUserByUsername($username);
+        if(!$user){
+            return "Tai khoan khong ton tai";
+        }
+        else{
+            $messeger = $this->userDAO->loginDAO($user,$password);
+            return $messeger;
+        }
+        
+    }
+
+    public function resetpw_ctr($email, $newpw) {
+    if ($this->userDAO->resetpw($email, $newpw)) {
+        return "Đổi mật khẩu thành công";
+    }
+    return "Đổi mật khẩu thất bại";
     }
 }
 ?>

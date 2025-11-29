@@ -8,10 +8,11 @@ class User
     private $role;
     private $email;
     private $created_at;
+    private $status;
 
     // Constructor
     public function __construct($id_user = null, $username = null, $password = null, 
-                                $role = null, $email = null, $created_at = null) {
+                                $role = null, $email = null, $created_at = null, $status=null) {
         $this->id_user = $id_user;
         $this->username = $username;
         $this->password = $password;
@@ -45,6 +46,10 @@ class User
         return $this->created_at;
     }
 
+    public function getStatus(){
+        return $this->status;
+    }
+
     // Setters
     public function setIdUser($id_user) {
         $this->id_user = $id_user;
@@ -68,6 +73,10 @@ class User
 
     public function setCreatedAt($created_at) {
         $this->created_at = $created_at;
+    }
+
+    public function setStatus($status){
+        $this->status = $status;
     }
 }
 

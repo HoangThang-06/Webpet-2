@@ -34,10 +34,9 @@ $result = $conn->query($sql);
   <div class="pet-item">
     <img src="<?= $pet['image'] ?>" alt="<?= htmlspecialchars($pet['name']) ?>">
     <div class="info">
-      <strong><?= htmlspecialchars($pet['name']) ?></strong>
-      <span>Loài: <?= htmlspecialchars($pet['species']) ?></span><br>
-      <span>Tuổi: <?= htmlspecialchars($pet['age']) ?> tuổi</span><br>
-      <span>Giới tính: <?= htmlspecialchars($pet['gender']) ?></span><br>
+      <p><?= htmlspecialchars($pet['name']) ?></p>
+      <span><strong>Tuổi: </strong><?= htmlspecialchars($pet['age']) ?> tuổi</span><br>
+      <span><strong>Giới tính: </strong><?= htmlspecialchars($pet['gender']) ?></span><br>
       <a href="form-adoption.php?id=<?= $pet['id'] ?>" class="btn btn-success">Nhận nuôi</a>
       <a href="detailpet.php?id=<?= $pet['id'] ?>" class="btn btn-info" style="margin:10px 0px">Xem chi tiết</a>
     </div>
@@ -45,7 +44,7 @@ $result = $conn->query($sql);
 <?php endwhile; ?>
 </div>
 
-<div class="pagination" style="display:flex; justify-content:center; align-items:center; margin:30px 0; flex-wrap:wrap; gap:8px;">
+<div class="pagination">
 <?php
 if ($currentPage > 1 && $total_page > 1) {
     echo '<a class="page-link" data-page="'.($currentPage-1).'" href="#"><-</a>';

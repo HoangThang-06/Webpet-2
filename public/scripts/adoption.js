@@ -45,3 +45,15 @@ form.addEventListener('submit', e => {
   loadPets();
 });
 loadPets();
+//load
+const overlays = document.querySelectorAll('.overlay-text');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.5 }); // 50% phần tử hiển thị trong viewport
+
+overlays.forEach(el => observer.observe(el));

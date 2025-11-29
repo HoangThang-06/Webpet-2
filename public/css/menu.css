@@ -1,93 +1,166 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    background-color: #dee0c3ff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
 
-/* Reset cơ bản */
-body {
-      padding-top: 80px;
-    }
-    .nav-link { font-weight: 500; }
-    .btn-auth { font-weight: bold; margin-left: 10px; }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  .logo {
+    padding-left: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 3px solid;
+  }
+
+  /* Menu container */
+  .menu-container {
+    padding-right: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  nav a:hover { color: #007bff; }
+
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .auth-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 126px;
+    color: #fff;
+    transition: .3s;
+  }
+
+  .login-btn { background-color: blue; }
+  .login-btn:hover { background-color: #00bfff; }
+
+  .signup-btn { background-color: red; }
+  .signup-btn:hover { background-color: #ff7f50; }
+/* Icon giỏ hàng hình tròn */
+.icon-btn {
+  position: relative;
+  width: 50px;       /* kích thước hình tròn */
+  height: 50px;
+  border-radius: 50%; /* hình tròn */
+  background-color: #a8ce2cff; /* màu nền icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  font-size: 24px;
+  color: white;
+  padding:0;
 }
 
-/* Navbar */
-.navbar-custom {
-  background: rgba(255, 255, 255, 0.1); 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-  font-family: "Poppins", sans-serif;
-  transition: all 0.3s ease;
+/* Badge số */
+.icon-btn .badge {
+  position: absolute;
+  top: -8px;         /* vị trí trên cùng */
+  right: -8px;       /* lệch sang phải */
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
 }
 
-/* Các liên kết nav */
-.navbar-nav .nav-link {
-  color: #222; 
-  font-weight: 500;
-  padding: 8px 16px;
-  transition: 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-  color: #007bff; 
-  text-shadow: 0 0 2px rgba(0, 123, 255, 0.4);
-}
-
-.navbar-nav .nav-link.active {
-  color: #d63384;
-  font-weight: 700;
-}
-
-/* Logo */
-.logo {
+/* Avatar */
+.avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgb(14, 139, 69);
-  margin-right: 10px;
-}
-
-/* Button đăng nhập/đăng ký/đăng xuất */
-.btn-auth {
-  font-weight: bold;
-  margin-left: 10px;
-}
-.icon-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #f0f0f0;
-  margin-right: 10px; /* khoảng cách giữa các icon */
+  background-size: cover;
+  background-position: center;
   cursor: pointer;
+  border: 2px solid #007bff;
 }
 
-.icon-btn:hover {
-  background-color: #e0e0e0;
-}
 
-.icon-btn .material-symbols-outlined {
-  font-size: 24px;
-}
+  /* Hamburger */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
 
-.icon-btn .badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: red;
-  color: white;
-  width: 20px;
-  height: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
+  .menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 4px 0;
+    transition: 0.3s;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .menu-container {
+      position: absolute;
+      top: 60px;
+      left: -100%;
+      flex-direction: column;
+      width: 100%;
+      background-color: #dee0c3ff;
+      gap: 20px;
+      padding: 15px 0;
+      align-items: center;
+      transition: left 0.3s ease;
+    }
+
+    .menu-container.active {
+      left: 0;
+    }
+
+    nav {
+      flex-direction: column; /* Links xếp chồng */
+      gap: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .auth-buttons {
+      flex-direction: row; /* 2 nút nằm ngang */
+      justify-content: center;
+      width: 100%;
+      gap: 20px;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  } 

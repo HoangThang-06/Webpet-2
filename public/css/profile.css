@@ -1,0 +1,135 @@
+/* Khung tổng */
+.account-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 50px;
+    border: 1px solid #f0f0f0;
+    min-height: 300px;
+}
+
+.avatar-section {
+    flex: 0 1 40%; /* Cho phép shrink nếu cần để tránh đè lên nhau */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.avatar-section img {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.avatar-section img:hover {
+    transform: scale(1.05);
+    border-color: #888;
+}
+
+.change-avatar-btn {
+    background-color: #f0f0f0;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.change-avatar-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Form Section - bên phải 60% */
+.form-section {
+    flex: 1 1 60%; /* Cho phép grow và shrink để chiếm phần còn lại và tránh đè lên nhau */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cột */
+    gap: 18px 25px;
+}
+
+/* Cho các input dài toàn hàng */
+.form-section .form-group.full {
+    grid-column: span 2;
+}
+
+/* Input & Label */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #444;
+    font-size: 15px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #d4d7dd;
+    background: #f9fafb;
+    font-size: 15px;
+    transition: 0.25s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    background: #fff;
+    border-color: #7aa7f7;
+    box-shadow: 0 0 0 3px rgba(122,167,247,0.3);
+}
+
+/* Nút Lưu */
+.btn-primary {
+    padding: 12px 24px;
+    background: #7aa7f7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.25s;
+    grid-column: span 2; /* chiếm toàn hàng */
+}
+
+.btn-primary:hover {
+    background: #547cd7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .account-box {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .avatar-section,
+    .form-section {
+        flex: 1 1 100%; /* chiếm toàn bộ chiều ngang */
+        height: auto;
+    }
+
+    .form-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-primary {
+        grid-column: auto;
+    }
+}

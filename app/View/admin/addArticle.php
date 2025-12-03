@@ -144,30 +144,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php endif; ?>
 
                     <form action="" method="post" enctype="multipart/form-data">
+
+                        <!-- Tiêu đề -->
                         <div class="mb-3">
-                            <label for="title" class="form-label"><i class="bi bi-pencil-square me-1"></i>Tiêu đề</label>
+                            <label for="title" class="form-label">
+                                <i class="bi bi-pencil-square me-1"></i>Tiêu đề
+                            </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-type"></i></span>
-                                <input type="text" class="form-control" name="title" id="title" placeholder="Nhập tiêu đề bài báo" required>
+                                <input type="text" class="form-control" name="title" id="title"
+                                    placeholder="Nhập tiêu đề bài báo" required>
                             </div>
                         </div>
 
+                        <!-- Nội dung TXT -->
                         <div class="mb-3">
-                            <label for="conten" class="form-label"><i class="bi bi-file-earmark-text me-1"></i>Nội dung (.txt)</label>
+                            <label for="conten" class="form-label">
+                                <i class="bi bi-file-earmark-text me-1"></i>Nội dung (.txt)
+                            </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-upload"></i></span>
-                                <input type="file" class="form-control" name="conten" id="conten" accept=".txt" required>
+                                <input type="file" class="form-control" name="conten" id="conten" 
+                                    accept=".txt" required>
                             </div>
                             <div class="form-text">Chỉ chấp nhận file .txt</div>
                         </div>
 
+                        <!-- Hình ảnh -->
                         <div class="mb-3">
-                            <label for="image" class="form-label"><i class="bi bi-image me-1"></i>Hình ảnh</label>
+                            <label for="image" class="form-label">
+                                <i class="bi bi-image me-1"></i>Hình ảnh
+                            </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-camera"></i></span>
                                 <input type="file" class="form-control" name="image" id="image" accept="image/*">
                             </div>
                             <div class="form-text">Tùy chọn: JPG, PNG, GIF, v.v.</div>
+                        </div>
+
+                        <!-- CATEGORY -->
+                        <div class="mb-3">
+                            <label for="category" class="form-label">
+                                <i class="bi bi-tags me-1"></i>Danh mục bài viết
+                            </label>
+                            <select name="category" id="category" class="form-select" required>
+                                <option value="">-- Chọn danh mục --</option>
+                                <option value="cm">Chó và Mèo</option>
+                                <option value="k">Khác</option>
+                            </select>
                         </div>
 
                         <input type="hidden" name="click" value="0">
@@ -186,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body d-flex flex-column justify-content-center">
-                    <img src="D:\year2\Projectweb\public\img\image.png" alt="Upload Article Illustration" class="intro-image">
+                    <img src="\public\img\image.png" alt="Upload Article Illustration" class="intro-image">
                     <h5 class="text-center mb-3">Chức năng Upload Bài Báo cho Admin</h5>
                     <p class="intro-text">
                         Chức năng này được thiết kế dành riêng cho quản trị viên (Admin) để tải lên các bài báo mới một cách dễ dàng và hiệu quả. Bạn có thể quản lý nội dung trang web bằng cách thêm các bài viết chất lượng.

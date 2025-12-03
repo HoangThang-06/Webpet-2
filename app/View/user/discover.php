@@ -31,7 +31,6 @@
   </head>
   <body>
     <div>
-      <?php include('../layout/menu.php'); ?>
       <div id="demo" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
@@ -109,37 +108,44 @@
         <hr class="custom-hr" />
 
         <!--pham tin tuc-->
-        <div class="row row-cols-1 row-cols-md-2 g-4" id="post-list">
-          <?php 
-          include('../../controller/dbconnect.php');
-          $sql = "SELECT * FROM articles ORDER BY create_at DESC";
-          $result=$conn->query($sql);
-          if ($result && $result->num_rows > 0) {
-            while ($row = mysqli_fetch_array($result)) {
-                $id_article = $row['id_article'];
-                $title = htmlspecialchars($row['title']);
-                $date_post = date('d/m/Y', strtotime($row['create_at']));
-                $image = htmlspecialchars($row['image']);
-                $link = "articles.php?id=" . $id_article;
-                ?>
-                <div class="col">
-                    <a href="<?= $link ?>" class="t1 text-decoration-none">
-                        <div class="post-card">
-                            <div>
-                                <div class="post-date"><?= $date_post ?></div>
-                                <div class="post-title"><?= $title ?></div>
+            <div class="row row-cols-1 row-cols-md-2 g-4" id="post-list">
+        <?php 
+            require_once __DIR__. '/../../controller/Article_ctr.php';
+
+            $articleCtr = new ArticleController();
+            $articles = $articleCtr->getAllArticles();
+
+            if (!empty($articles)) {
+                foreach ($articles as $row) {
+
+                    $id_article = $row['id_article'];
+                    $title = htmlspecialchars($row['title']);
+                    $date_post = date('d/m/Y', strtotime($row['create_at']));
+                    $image = htmlspecialchars($row['image']);
+                    $category = htmlspecialchars($row['category']);
+                    $data_click = intval($row['click']);
+                    $link = "articles.php?id=" . $id_article;
+                    ?>
+                    
+                    <div class="col" data-category="<?= $category ?>" data-click="<?= $data_click ?>">
+                        <a href="<?= $link ?>" class="t1 text-decoration-none">
+                            <div class="post-card">
+                                <div>
+                                    <div class="post-date"><?= $date_post ?></div>
+                                    <div class="post-title"><?= $title ?></div>
+                                </div>
+                                <img src="<?= $image ?>" alt="Ảnh bài viết" class="post-img" />
                             </div>
-                            <img src="<?= $image ?>" alt="Ảnh bài viết" class="post-img" />
-                        </div>
-                    </a>
-                </div>
-                <?php
+                        </a>
+                    </div>
+
+                    <?php
+                }
+            } else {
+                echo "<p>Chưa có bài viết nào.</p>";
             }
-       } else {
-            echo "<p>Chưa có bài viết nào.</p>";
-        }
-          ?>
-        </div>
+        ?>
+      </div>
         <!-- NÚT HIỂN THỊ THÊM -->
         <div class="load-more-wrapper pb-5">
           <button id="load-more" class="load-more-btn">

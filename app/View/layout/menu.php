@@ -1,9 +1,10 @@
 <?php
-//session_start();
-include('../../controller/dbconnect.php');
-/*setcookie('user', 'Tuyen', time() + 3600, '/');
-$isLogin = true; // Biến này dùng ngay lập tức
-$username = 'Tuyen';
+session_start();
+require_once __DIR__."/../../controller/DBConnection.php";
+setcookie('user', 'Tuyen', time() + 3600, '/');
+$isLogin = isset($_COOKIE['user']);
+$username = $isLogin ? htmlspecialchars($_COOKIE['user']) : "";
+>>>>>>> b71cec2 (update)
 $avatar = '../../../public/img/logo.png';
 if ($isLogin) {
     $stmt = $conn->prepare("SELECT avatar FROM users WHERE username = ?");

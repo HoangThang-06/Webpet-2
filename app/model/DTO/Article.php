@@ -46,6 +46,10 @@ class ArticleDTO
         return $this->click;
     }
 
+    public function getCategory(){
+        return $this->category;
+    }
+
     // Setters
     public function setIdArticle($id_article) {
         $this->id_article = $id_article;
@@ -69,6 +73,10 @@ class ArticleDTO
 
     public function setClick($click) {
         $this->click = $click;
+    }
+
+    public function setCategory($category){
+        $this->category=$category;
     }
 }
 

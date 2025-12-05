@@ -1,16 +1,19 @@
 <?php 
 include('../../controller/dbconnect.php'); 
-$sql = "SELECT * FROM pets ORDER BY RAND() LIMIT 6";
-$result = $conn->query($sql);
-if (!$result) {
+
+$sqlPets = "SELECT * FROM pets ORDER BY RAND() LIMIT 6";
+$resultPets = $conn->query($sqlPets);
+if (!$resultPets) {
     die("Lỗi SQL pets: " . $conn->error);
 }
-$sqlarticle = "SELECT * FROM articles ORDER BY RAND() LIMIT 3";
-$resultarticle = $conn->query($sqlarticle);
-if (!$resultarticle) {
+
+$sqlArticle = "SELECT * FROM articles ORDER BY RAND() LIMIT 3";
+$resultArticle = $conn->query($sqlArticle);
+if (!$resultArticle) {
     die("Lỗi SQL articles: " . $conn->error);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +73,7 @@ if (!$resultarticle) {
             <button class="btn-prev">&#8249;</button>
             <div class="pet-wrapper">
                 <div class="pet-track">
-                    <?php while($pet = mysqli_fetch_assoc($result)){ ?>
+                    <?php while($pet = mysqli_fetch_assoc($resultPets)){ ?>
                         <div class="pet-item">
                             <img src="<?= $pet['image'] ?>" alt="<?= htmlspecialchars($pet['name']) ?>">
                             <div class="info">
@@ -93,7 +96,7 @@ if (!$resultarticle) {
     <div class="content">
         <h1 class="title">Tin Tức</h1>
         <div class="articles-wrapper">
-            <?php while($article = mysqli_fetch_assoc($resultarticle)){ ?>
+            <?php while($article = mysqli_fetch_assoc($resultArticle)){ ?>
                 <div class="article-item">
                     <img src="<?= $article['image'] ?>" alt="<?= htmlspecialchars($article['title']) ?>">
                     <div class="info-article">
@@ -106,27 +109,6 @@ if (!$resultarticle) {
         <a class="a-content" href="discover.php">Đọc Thêm</a>
     </div>
     <?php include('../layout/footer.php'); ?>
-    <script>
-        const track = document.querySelector('.pet-track');
-        const items = document.querySelectorAll('.pet-item');
-        const btnNext = document.querySelector('.btn-next');
-        const btnPrev = document.querySelector('.btn-prev');
-        let index = 0;
-        const visibleCount = 3;
-        const itemStyle = getComputedStyle(items[0]);
-        const itemWidth = items[0].offsetWidth + parseInt(itemStyle.marginLeft) + parseInt(itemStyle.marginRight);
-        btnNext.addEventListener('click', () => {
-            if (index < items.length - visibleCount) { 
-                index++;
-                track.style.transform = `translateX(-${index * itemWidth}px)`;
-            }
-        });
-        btnPrev.addEventListener('click', () => {
-            if (index > 0) {
-                index--;
-                track.style.transform = `translateX(-${index * itemWidth}px)`;
-            }
-        });
-    </script>
+    <script src="../../../public/scripts/virtual.js"></script>
 </body>
 </html>

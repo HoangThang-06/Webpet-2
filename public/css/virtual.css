@@ -87,7 +87,7 @@ body {
 }
 .s-list li::before {
     content: "";
-    background-image: url('../../../public/icon/pet-care.png');
+    background-image: url('../icon/pet-care.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 25px;
@@ -256,7 +256,7 @@ body {
     .banner-donate{
         width: 100%; 
         height: 200px;
-        background-image: url('../../../public/img/backgrounddonate.jpg');
+        background-image: url('../img/backgrounddonate.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

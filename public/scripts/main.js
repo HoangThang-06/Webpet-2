@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
           counters.forEach((counter) => {
             const target = +counter.getAttribute("data-target");
             let count = 0;
-            const speed = target / 200;
+            const speed = target / 100;
             const updateCount = () => {
               if (count < target) {
                 count += speed;
@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname.split("/").pop();
-  if (!currentPage || currentPage === "index.html") {
-    currentPage = "trangchu.html";
+  if (!currentPage || currentPage === "index.php") {
+    currentPage = "index.php";
   }
   document.querySelectorAll(".navbar-nav .nav-link").forEach(function (link) {
     const href = link.getAttribute("href");

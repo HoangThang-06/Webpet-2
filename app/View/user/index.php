@@ -1,10 +1,18 @@
+<?php
+include('../../controller/dbconnect.php');
+$sql = "SELECT * FROM articles ORDER BY create_at DESC LIMIT 3";
+$resultartilce = mysqli_query($conn, $sql);
+if(!$resultartilce){
+    die("Query lỗi: " . mysqli_error($conn));
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang chủ</title>
-  <link rel="stylesheet" href="../../../public/css/index.css">
+  <link rel="stylesheet" href="../../../public/css/index.css?v=<?php echo time(); ?>">
 </head>
 <body>
   <?php include('../layout/menu.php'); ?>
@@ -98,62 +106,51 @@
         <p>Sau khi được duyệt, bạn có thể đến trung tâm để gặp và đón thú cưng về nhà.</p>
       </div>
     </div>
-  </section>
-  <section class="stats-section">
+    </section>
+    <section class="stats-section">
     <div class="stat">
-      <img src="https://img.icons8.com/?size=100&id=pIsEBkjSP5oU&format=png&color=000000" alt="Ca cứu hộ">
-      <h2>999</h2>
+      <img src="../../../public/icon/kitten.png" alt="Ca cứu hộ">
+      <h2 class="counter" data-target="79">0</h2>
       <p>Ca Cứu Hộ</p>
     </div>
     <div class="stat">
       <img src="https://img.icons8.com/?size=100&id=uKlTjfKow8jE&format=png&color=000000" alt="Đã có chủ">
-      <h2>999</h2>
+      <h2 class="counter" data-target="99">0</h2>
       <p>Đã Có Chủ</p>
     </div>
     <div class="stat">
       <img src="https://img.icons8.com/?size=100&id=124062&format=png&color=000000" alt="Chờ tìm chủ">
-      <h2>356</h2>
+      <h2 class="counter" data-target="56">0</h2>
       <p>Chờ Tìm Chủ</p>
     </div>
     <div class="stat">
       <img src="https://img.icons8.com/?size=100&id=gUBBddhPeeby&format=png&color=000000" alt="Chưa sẵn sàng">
-      <h2>185</h2>
+      <h2 class="counter" data-target="15">0</h2>
       <p>Chưa Sẵn Sàng Tìm Chủ</p>
     </div>
   </section>
-  <section class="news-section">
-    <div class="container">
-      <h2 class="section-title">TIN TỨC</h2>
-      <div class="news-grid">
-        <div class="news-card">
-          <img src="https://images2.thanhnien.vn/thumb_w/640/528068263637045248/2023/5/31/menh-ba--bat-chi-cho-bs-trong-anh-quang-vien-1685547779370897457080.jpg" alt="Đăng ký TNV">
-          <div class="news-content">
-            <div class="news-date">28<br><small>T6</small></div>
-            <h3>Đăng Ký Tình Nguyện Viên</h3>
-            <p>Hoạt động cứu hộ của Hanoi chúng tôi chỉ có thể thành công nhờ sự chung sức từ cộng đồng...</p>
+    <section class="news-section">
+      <div class="container">
+          <h2 class="section-title">TIN TỨC</h2>
+          <div class="news-grid">
+              <?php while($article = mysqli_fetch_assoc($resultartilce)): 
+                  $date = date("d", strtotime($article['create_at']));
+                  $month = date("m", strtotime($article['create_at']));
+              ?>
+              <div class="news-card">
+                  <img src="<?= htmlspecialchars($article['image']) ?>" alt="<?= htmlspecialchars($article['title']) ?>">
+                  <div class="news-content">
+                      <div class="news-date"><?= $date ?><br><small>T<?= $month ?></small></div>
+                      <h3><a href="articles.php?id=<?php echo $article['id_article']; ?>"><?= htmlspecialchars($article['title']) ?></a></h3>
+                      <p><?= htmlspecialchars(substr($article['content'], 0, 100)) ?>...</p>
+                  </div>
+              </div>
+              <?php endwhile; ?>
           </div>
-        </div>
-        <div class="news-card">
-          <img src="https://chuyendong24h.net/wp-content/uploads/2022/09/collage-2022-04-10T121758.660-1649567886x1024-1.jpg" alt="Cứu hộ cún">
-          <div class="news-content">
-            <div class="news-date">20<br><small>T5</small></div>
-            <h3>Cứu Hộ Bé Cún Ghẻ Bị Bỏ Rơi Ở Bãi Rác</h3>
-            <p>Ngày ý tưởng không cứu được bé. Nửa đêm nhờ tình nguyện viên chạy ô tô lên Phú Thọ...</p>
+          <div class="read-more">
+              <a href="discover.php">ĐỌC THÊM</a>
           </div>
-        </div>
-        <div class="news-card">
-          <img src="https://kenh14cdn.com/thumb_w/600/dpA6uSv3GtBzvbRT7Y4EBtfN37yCA/Image/2014/07/18-8c0b2.jpg" alt="Nuôi chó">
-          <div class="news-content">
-            <div class="news-date">19<br><small>T4</small></div>
-            <h3>Có Nên Nuôi Chó Hay Không Khi Bạn Quá...</h3>
-            <p>Nếu bạn có thể cân đối cuộc sống để đón một chú chó thì xin chúc mừng vì bạn sắp có bạn đồng hành...</p>
-          </div>
-        </div>
       </div>
-      <div class="read-more">
-        <a href="discover.php">ĐỌC THÊM</a>
-      </div>
-    </div>
   </section>
     <script src="../../../public/scripts/main.js"></script>
   <?php include('../layout/footer.php'); ?>

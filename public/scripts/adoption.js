@@ -54,6 +54,7 @@ const observer = new IntersectionObserver(entries => {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.5 }); // 50% phần tử hiển thị trong viewport
+}, { threshold: 0.5 });
 
 overlays.forEach(el => observer.observe(el));
+//chi tiet pet

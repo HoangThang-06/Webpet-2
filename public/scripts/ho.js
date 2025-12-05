@@ -36,12 +36,3 @@ menuLinks.forEach(link => {
         // Không preventDefault nữa -> link chuyển trang bình thường
     });
 });
-
-// Action buttons
-const actionButtons = document.querySelectorAll('.btn');
-
-actionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        alert('Chức năng đang được phát triển!');
-    });
-});

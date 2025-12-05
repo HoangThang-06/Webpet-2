@@ -3,7 +3,7 @@ include('../../controller/dbconnect.php');
 $type = $_GET['type'] ?? 'all';
 $search = $_GET['search'] ?? '';
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$limit = 10;
+$limit = 12;
 $start = ($currentPage - 1) * $limit;
 
 $sqlCount = "SELECT COUNT(id) AS total FROM pets WHERE 1=1";
@@ -38,12 +38,11 @@ $result = $conn->query($sql);
       <span><strong>Tuổi: </strong><?= htmlspecialchars($pet['age']) ?> tuổi</span><br>
       <span><strong>Giới tính: </strong><?= htmlspecialchars($pet['gender']) ?></span><br>
       <a href="form-adoption.php?id=<?= $pet['id'] ?>" class="btn btn-success">Nhận nuôi</a>
-      <a href="detailpet.php?id=<?= $pet['id'] ?>" class="btn btn-info" style="margin:10px 0px">Xem chi tiết</a>
+      <a href="" class="btn btn-info view-detail" data-id="<?= $pet['id'] ?>" style="margin:10px 0px">Xem chi tiết</a>
     </div>
   </div>
 <?php endwhile; ?>
 </div>
-
 <div class="pagination">
 <?php
 if ($currentPage > 1 && $total_page > 1) {

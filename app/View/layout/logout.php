@@ -1,5 +1,7 @@
 <?php
-setcookie("user", "", time() - 3600, "/");
-header("Location: index.php");
-exit;
+session_start();
+session_unset();
+session_destroy();
+header("Location: /Webpet-2/app/View/user/index.php");
+exit();
 ?>

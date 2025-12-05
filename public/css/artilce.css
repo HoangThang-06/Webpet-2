@@ -1,0 +1,96 @@
+.post-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700; /* Bold */
+  text-decoration: none; /* remove underline if any */
+}
+
+.post-card:hover {
+  color: rgb(8, 177, 250);
+}
+
+.post-card:hover .post-link {
+  color: rgb(8, 177, 250);
+}
+
+/* Post List Styles */
+#post-list .col {
+  display: none;
+}
+
+#post-list .col.visible {
+  display: block;
+}
+
+/* Post Image Styles */
+.post-img {
+  width: 160px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-left: 20px;
+}
+
+a.t1 {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+a.t1 * {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+/* Post Title and Link Styles */
+.post-title {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.post-link {
+  text-decoration: none;
+  color: #0d6efd;
+}
+
+.post-link:hover {
+  text-decoration: none; /* no underline on hover */
+}
+
+/* Post Date Styles */
+.post-date {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .bao {
+    width: 100%;
+    height: auto;
+  }
+
+  .ttkhac {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column-reverse;
+  }
+
+  .xt {
+    padding: 0;
+    margin: 0;
+  }
+}
+

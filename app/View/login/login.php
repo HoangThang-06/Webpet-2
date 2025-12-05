@@ -36,7 +36,6 @@
 
 <?php
     require_once __DIR__ . "/../../controller/Usercontroller/Usercontroller.php";
-
     session_start();
 
     $success_message = "";
@@ -59,7 +58,7 @@
             $message="Mật khẩu không đúng";
         }
         else{
-            //xu ly dang nhap thanh cong
+            header('Location:../user/index.php');
         }
     }
 ?>

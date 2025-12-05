@@ -9,8 +9,7 @@
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  }
-
+  }   
   .logo {
     padding-left: 60px;
     display: flex;
@@ -52,42 +51,63 @@
     display: flex;
     gap: 10px;
   }
-
-  .auth-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 126px;
-    color: #fff;
-    transition: .3s;
-  }
-
-  .login-btn { background-color: blue; }
-  .login-btn:hover { background-color: #00bfff; }
-
-  .signup-btn { background-color: red; }
-  .signup-btn:hover { background-color: #ff7f50; }
-/* Icon giỏ hàng hình tròn */
-.icon-btn {
-  position: relative;
-  width: 50px;       /* kích thước hình tròn */
-  height: 50px;
-  border-radius: 50%; /* hình tròn */
-  background-color: #a8ce2cff; /* màu nền icon */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  font-size: 24px;
-  color: white;
-  padding:0;
+.login-btn {
+    background-color: blue;
+    padding: 5px 15px;
+    border-radius: 10px;
+    display: inline-block;
+     border:3px solid blue;
 }
 
-/* Badge số */
-.icon-btn .badge {
+.signup-btn {
+    background-color: red;
+    padding: 5px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    border:3px solid red;
+}
+.login-btn a,
+.signup-btn a {
+    text-decoration: none;
+    color: white;       
+    display: inline-block;
+}
+.login-btn:hover {
+    background-color: #00bfff;
+    border:3px solid #00bfff;
+}
+.signup-btn:hover {
+    background-color: #ff7f50;
+    border:3px solid #ff7f50;
+}
+.avatar-wrapper {
+  position: relative; 
+  display: inline-block;
+}
+
+.avatar-wrapper .badge {
+  position: absolute;
+  top: -6px; 
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+/* Avatar */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  border: 2px solid #007bff;
+}
+.badge{
   position: absolute;
   top: -8px;         /* vị trí trên cùng */
   right: -8px;       /* lệch sang phải */
@@ -99,18 +119,6 @@
   font-weight: bold;
   box-shadow: 0 0 2px rgba(0,0,0,0.3);
 }
-
-/* Avatar */
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  border: 2px solid #007bff;
-}
-
 
   /* Hamburger */
   .menu-toggle {

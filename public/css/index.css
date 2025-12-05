@@ -244,6 +244,10 @@
     }
 
     .news-content h3 { margin: 10px 0 5px; font-size: 18px; }
+    .new-content a{ margin: 10px 0 5px; font-size: 18px;}
+    .newcontent h3 a{
+       text-decoration: none;
+    }
     .news-content p { color: #555; font-size: 14px; }
 
     .read-more { text-align: center; margin-top: 30px; }

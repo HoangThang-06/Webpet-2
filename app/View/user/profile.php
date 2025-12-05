@@ -1,37 +1,42 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '1905', 'webpet');
-$idUser = 1;
-$sql = "SELECT * FROM users WHERE id=$idUser";
-$result = $conn->query($sql);
-$user = mysqli_fetch_assoc($result);
-
-if(isset($_POST['update_account'])){
-    $fullname = $_POST['fullname'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
-    $birthday = $_POST['birthday'];
-    $gender = $_POST['gender'];
-
-    if(isset($_FILES['avatar']) && $_FILES['avatar']['error']==0){
-    $avatarName = time().'_'.$_FILES['avatar']['name'];
-    $avatarPath = '../../../public/img/' . $avatarName;
-    if(move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarPath)){
-        $avatarSQL = ", avatar='$avatarPath'";
-    } else {
-        echo "<script>alert('Không thể upload file!');</script>";
-    }
+session_start();
+include('../../controller/dbconnect.php');
+if (!isset($_SESSION['user']['username'])) {
+    header("Location: ../login/login.php");
+    exit;
 }
- else {
-        $avatarSQL = "";
+$username = $_SESSION['user']['username'];
+$stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+$idUser = $user['id_user'];
+if (isset($_POST['update_account'])) {
+    $fullname = $_POST['fullname'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $address = $_POST['address'] ?? '';
+    $birthday = $_POST['birthday'] ?? '';
+    $gender = $_POST['gender'] ?? '';
+    $avatarPath = $user['avatar'];
+    if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] == 0) {
+        $avatarName = time() . '_' . basename($_FILES['avatar']['name']);
+        $avatarUploadPath = '../../../public/img/' . $avatarName;
+        if (move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarUploadPath)) {
+            $avatarPath = '../../../public/img/' . $avatarName;
+        } else {
+            echo "<script>alert('Không thể upload file!');</script>";
+        }
     }
-
-    $sqlUpdate = "UPDATE users 
-                  SET fullname='$fullname', phone='$phone', address='$address',birthday='$birthday', gender='$gender' $avatarSQL
-                  WHERE id=".$user['id'];
-    mysqli_query($conn, $sqlUpdate);
-
-    // Load lại dữ liệu mới
-    $user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id=".$user['id']));
+    $stmt = $conn->prepare("UPDATE users SET fullname=?, phone=?, address=?, birthday=?, gender=?, avatar=? WHERE id_user=?");
+    $stmt->bind_param("ssssssi", $fullname, $phone, $address, $birthday, $gender, $avatarPath, $idUser);
+    $stmt->execute();
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id_user=?");
+    $stmt->bind_param("i", $idUser);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
     echo "<script>alert('Cập nhật thành công!');</script>";
 }
 ?>
@@ -44,6 +49,7 @@ if(isset($_POST['update_account'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../../public/css/ho.css">
     <link rel="stylesheet" href="../../../public/css/profile.css">
+    <link rel="stylesheet" href="../../../public/css/cart.css">
 </head>
 <body>
     <button class="menu-toggle" onclick="toggleMenu()">
@@ -55,13 +61,11 @@ if(isset($_POST['update_account'])){
         <aside class="sidebar" id="sidebar">
             <div class="user-profile">
                 <div class="user-avatar">
-                    <img src="<?php 
-                        echo !empty($user['avatar']) ? $user['avatar'] : 'public/img/default.png'; 
-                    ?>" alt="Avatar" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                    <img src="<?php echo !empty($user['avatar']) ? $user['avatar'] : '../../../public/img/avatars/avtdefault.png'; ?>" alt="Avatar" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
                 </div>
                 <div class="user-info">
-                    <div class="user-name"><?php echo $user['fullname']; ?></div>
-                    <div class="user-email"><?php echo $user['email']; ?></div>
+                    <div class="user-name"><?php echo htmlspecialchars($user['fullname'] ?? ''); ?></div>
+                    <div class="user-email"><?php echo htmlspecialchars($user['email']); ?></div>
                 </div>
             </div>
             <ul class="menu-list">
@@ -78,19 +82,33 @@ if(isset($_POST['update_account'])){
                     </a>
                 </li>
                 <li class="menu-item">
+                    <a href="cart.php" class="menu-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Giỏ hàng</span>
+                        <?php
+                        $resultCount=mysqli_query($conn,"SELECT * FROM cart WHERE user_id=$idUser");
+                        $total=mysqli_num_rows($resultCount);
+                        if($total>0){
+                            echo '<span class="cart-badge">'.$total.'</span>';
+                        }
+                        ?>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="index.php" class="menu-link">
                         <i class="fas fa-home"></i>
                         <span>Trang chủ</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="logout.php" class="menu-link logout">
+                    <a href="../layout/logout.php" class="menu-link logout">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Đăng xuất</span>
                     </a>
                 </li>
             </ul>
         </aside>
+
         <main class="main-content">
             <div class="content-wrapper">
                 <div class="header">
@@ -100,7 +118,7 @@ if(isset($_POST['update_account'])){
 
                 <div class="account-box">
                     <div class="avatar-section">
-                        <img id="avatarPreview" src="<?php echo $user['avatar']; ?>" alt="Avatar">
+                        <img id="avatarPreview" src="<?php echo !empty($user['avatar']) ? $user['avatar'] : '../../../public/img/avatars/avtdefault.png'; ?>" alt="Avatar">
                         <label for="avatarInput" class="change-avatar-btn">Đổi ảnh</label>
                     </div>
                     <form action="" method="post" enctype="multipart/form-data">
@@ -108,22 +126,22 @@ if(isset($_POST['update_account'])){
                         <div class="form-section">
                             <div class="form-group">
                                 <label>Họ và tên</label>
-                                <input type="text" name="fullname" value="<?php echo $user['fullname']; ?>">
+                                <input type="text" name="fullname" value="<?php echo htmlspecialchars($user['fullname'] ?? ''); ?>">
                             </div>
 
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" value="<?php echo $user['email']; ?>" disabled>
+                                <input type="email" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
                             </div>
 
                             <div class="form-group">
                                 <label>Số điện thoại</label>
-                                <input type="text" name="phone" value="<?php echo $user['phone']; ?>">
+                                <input type="text" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
                             </div>
 
                             <div class="form-group">
                                 <label>Địa chỉ</label>
-                                <input type="text" name="address" value="<?php echo $user['address']; ?>">
+                                <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>">
                             </div>
 
                             <div class="form-group">
@@ -156,6 +174,10 @@ if(isset($_POST['update_account'])){
                 document.getElementById("avatarPreview").src = URL.createObjectURL(file);
             }
         });
+
+        function toggleMenu() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
     </script>
 </body>
 </html>

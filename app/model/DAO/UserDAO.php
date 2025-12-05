@@ -41,7 +41,6 @@ class UserDAO{
             }
             else return "user";
         }
-
         return "error";
     }
 

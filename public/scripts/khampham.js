@@ -1,75 +1,78 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let currentPage = window.location.pathname.split("/").pop();
-
-  // Nếu mở từ file trực tiếp hoặc đường dẫn gốc (""), thì mặc định là trang chủ
-  if (!currentPage || currentPage === "index.html") {
-    currentPage = "trangchu.html";
-  }
-
-  document.querySelectorAll(".navbar-nav .nav-link").forEach(function (link) {
-    const href = link.getAttribute("href");
-    if (href === currentPage) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
-    }
-  });
-});
-
-const posts = document.querySelectorAll("#post-list .col");
-const loadMoreBtn = document.getElementById("load-more");
-let visibleCount = 8;
-
-function showPosts() {
-  for (let i = 0; i < visibleCount && i < posts.length; i++) {
-    posts[i].classList.add("visible");
-  }
-
-  if (visibleCount >= posts.length) {
-    loadMoreBtn.style.display = "none";
-  }
-}
-
-showPosts();
-
-loadMoreBtn.addEventListener("click", () => {
-  visibleCount += 4; // Hiện thêm 4 bài mỗi lần nhấn
-  showPosts();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
   const filterInput = document.getElementById("filter-select");
   const buttons = document.querySelectorAll(".filter-buttons button");
-  const posts = document.querySelectorAll("#post-list .col");
+  const postList = document.getElementById("post-list");
+  const loadMoreBtn = document.getElementById("load-more");
+  let visibleCount = 8;
 
-  // Hàm lọc bài viết
-  function filterPosts(category) {
-    posts.forEach((post) => {
-      const postCategory = post.getAttribute("data-category");
-      if (category === "all" || postCategory === category) {
-        post.style.display = ""; // Hiện
+  function getPosts() {
+    return Array.from(document.querySelectorAll("#post-list .col"));
+  }
+
+  function showPosts() {
+    const posts = getPosts();
+    posts.forEach((post, index) => {
+      if (index < visibleCount) {
+        post.style.display = "";
       } else {
-        post.style.display = "none"; // Ẩn
+        post.style.display = "none";
+      }
+    });
+
+    if (visibleCount >= posts.length) {
+      loadMoreBtn.style.display = "none";
+    } else {
+      loadMoreBtn.style.display = "";
+    }
+  }
+
+  function filterPosts(category) {
+    const posts = getPosts();
+    posts.forEach((post) => {
+      if (category === "all" || post.dataset.category === category) {
+        post.style.display = "";
+      } else {
+        post.style.display = "none";
       }
     });
   }
 
-  // Gán sự kiện click cho các nút
+  function sortByClick() {
+    const posts = getPosts();
+
+    // Sắp xếp giảm dần theo click
+    posts.sort((a, b) => Number(b.dataset.click) - Number(a.dataset.click));
+
+    // Append lại vào DOM
+    posts.forEach((post) => postList.appendChild(post));
+
+    // Hiển thị tất cả bài viết
+    posts.forEach((post) => (post.style.display = ""));
+
+    // Ẩn nút load more vì đã hiển thị tất cả
+    loadMoreBtn.style.display = "none";
+  }
+
+  // Gán sự kiện cho các nút filter / nổi bật
   buttons.forEach((button) => {
     button.addEventListener("click", function () {
-      // Cập nhật class active
       buttons.forEach((btn) => btn.classList.remove("active"));
       this.classList.add("active");
 
-      // Cập nhật giá trị cho input ẩn
       const selectedValue = this.getAttribute("data-value");
       filterInput.value = selectedValue;
 
-      // Gọi hàm lọc
-      filterPosts(selectedValue);
+      if (selectedValue === "nb") {
+        sortByClick();
+      } else {
+        visibleCount = 8; // reset load more
+        filterPosts(selectedValue);
+        showPosts();
+      }
     });
   });
 
   // Mặc định lọc theo "all"
   filterPosts(filterInput.value || "all");
+  showPosts();
 });

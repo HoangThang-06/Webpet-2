@@ -38,7 +38,7 @@ $result = $conn->query($sql);
       <span><strong>Tuổi: </strong><?= htmlspecialchars($pet['age']) ?> tuổi</span><br>
       <span><strong>Giới tính: </strong><?= htmlspecialchars($pet['gender']) ?></span><br>
       <a href="form-adoption.php?id=<?= $pet['id'] ?>" class="btn btn-success">Nhận nuôi</a>
-      <a href="" class="btn btn-info view-detail" data-id="<?= $pet['id'] ?>" style="margin:10px 0px">Xem chi tiết</a>
+      <a href="get-pet.php?id=<?= $pet['id'] ?>" class="btn btn-info view-detail" style="margin:10px 0px">Xem chi tiết</a>
     </div>
   </div>
 <?php endwhile; ?>

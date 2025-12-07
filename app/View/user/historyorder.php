@@ -13,7 +13,7 @@ $user = mysqli_fetch_assoc($result);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch Sử Đơn Hàng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../../public/css/ho.css"></link>
+    <link rel="stylesheet" href="../../../public/css/ho.css?v=<?php echo time(); ?>"></link>
     <link rel="stylesheet" href="../../../public/css/cart.css"></link>
 </head>
 <body>
@@ -83,16 +83,22 @@ $user = mysqli_fetch_assoc($result);
                     <p>Quản lý và theo dõi tất cả đơn hàng của bạn</p>
                 </div>
                 <div class="filters">
-                    <button class="filter-btn active">Tất cả</button>
-                    <button class="filter-btn">Đang xử lý</button>
-                    <button class="filter-btn">Đang giao</button>
-                    <button class="filter-btn">Hoàn thành</button>
-                    <button class="filter-btn">Đã hủy</button>
+                    <a href="historyorder.php?filter=all" class="filter-btn <?= ($_GET['filter'] ?? 'all')=='all'?'active':'' ?>">Tất cả</a>
+                    <a href="historyorder.php?filter=7" class="filter-btn <?= ($_GET['filter'] ?? '')=='7'?'active':'' ?>">7 Ngày</a>
+                    <a href="historyorder.php?filter=15" class="filter-btn <?= ($_GET['filter'] ?? '')=='15'?'active':'' ?>">15 Ngày</a>
+                    <a href="historyorder.php?filter=30" class="filter-btn <?= ($_GET['filter'] ?? '')=='30'?'active':'' ?>">1 Tháng</a>
+                    <a href="historyorder.php?filter=180" class="filter-btn <?= ($_GET['filter'] ?? '')=='180'?'active':'' ?>">6 Tháng</a>
                 </div>
-
                 <div class="orders-list">
                 <?php
-                $orderQuery = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+                $filter = $_GET['filter'] ?? 'all';
+                $sql = "SELECT * FROM orders WHERE user_id = ? ";
+                if ($filter != 'all') {
+                    $days = intval($filter);
+                    $sql .= " AND created_at >= DATE_SUB(NOW(), INTERVAL $days DAY) ";
+                }
+                $sql .= " ORDER BY created_at DESC";
+                $orderQuery = $conn->prepare($sql);
                 $orderQuery->bind_param("i", $idUser);
                 $orderQuery->execute();
                 $orderResult = $orderQuery->get_result();
@@ -110,7 +116,7 @@ $user = mysqli_fetch_assoc($result);
                     }
                     $itemsQuery->execute();
                     $itemsResult = $itemsQuery->get_result();
-                ?>
+                    ?>
                     <div class="order-card">
                         <div class="order-header">
                             <div>
@@ -141,7 +147,7 @@ $user = mysqli_fetch_assoc($result);
                             </div>
                             <div class="action-buttons">
                                 <a href="add-review.php?order_id=<?= $order['order_id'] ?>" class="btn btn-primary">Đánh giá</a>
-                                <a href="#" class="btn btn-secondary">Mua lại</a>
+                                <a href="reorder.php?order_id=<?= $order['order_id'] ?>" class="btn btn-secondary">Mua lại</a>
                             </div>
                         </div>
                     </div>

@@ -4,8 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ủng hộ</title>
-  <link rel="stylesheet" href="../../../public/css/donate.css">
+  <link rel="stylesheet" href="../../../public/css/donate.css?v=<?php echo time(); ?>">
 </head>
+<div id="donatePopup" class="popup-overlay">
+    <div class="popup-box">
+
+        <form id="donateForm" action="upload_receipt.php" method="POST" enctype="multipart/form-data">
+            <h2>Ủng hộ ngay</h2>
+            <label>Số tiền (VND)</label>
+            <input type="number" id="amount" placeholder="Ví dụ: 50000">
+            <label>Lời nhắn</label>
+            <input type="text" id="message" placeholder="Ví dụ: Ung ho cac be">
+            <p class="warning">
+                ⚠️ Vui lòng chuyển khoản <b>chính xác số tiền</b> và <b>nội dung</b> bên dưới.
+                Sau khi chuyển khoản, vui lòng chụp ảnh biên lai và tải lên.
+            </p>
+            <button type="button" class="btn-generate" onclick="generateQR()">Tạo mã QR</button>
+            <div id="qrResult" class="qr-area" style="display:none;">
+                <h3>Mã QR thanh toán</h3>
+                <img id="qrImage" src="">
+            </div>
+            <div class="upload-area" id="uploadSection" style="display:none;">
+                <label>Tải ảnh biên lai lên:</label>
+                <input type="file" name="receipt" id="receipt" accept="image/*">
+
+                <input type="hidden" name="amount" id="hidden_amount">
+                <input type="hidden" name="message" id="hidden_message">
+
+                <button type="button" class="btn-confirm" onclick="confirmTransaction()">
+                    Xác nhận giao dịch
+                </button>
+            </div>
+
+        </form>
+        <button class="btn-close" onclick="closePopup()">Đóng</button>
+    </div>
+</div>
+
+
 <body>
   <?php include('../layout/menu.php'); ?>
   <img class="img-banner" src="../../../public/img/donate.png" alt="Donate">
@@ -26,7 +62,7 @@
     </div>
   </section>
   <div class="donate-button-wrapper">
-    <button>Ủng hộ ngay</button>
+    <button onclick="openPopup()">Ủng hộ ngay</button>
   </div>
  <div class="other-donate">
     <h1>Các phương thức ủng hộ khác</h1>
@@ -48,5 +84,6 @@
   <footer>
     <?php include('../layout/footer.php'); ?>
   </footer>
+  <script src="../../../public/scripts/donate.js"></script>
 </body>
 </html>

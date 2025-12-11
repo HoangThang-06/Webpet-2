@@ -21,20 +21,28 @@ $stmt->execute();
 $resultItems = $stmt->get_result();
 $products = $resultItems->fetch_all(MYSQLI_ASSOC);
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $hasReview = false;
     foreach($products as $product){
         $productId = $product['product_id'];
         $rating = intval($_POST['rating_'.$productId] ?? 0);
         $content = trim($_POST['content_'.$productId] ?? '');
+
         if($rating > 0 && $content !== ''){
             $insertSql = "INSERT INTO comments (id_user, id_product, rating, content) 
                           VALUES (?, ?, ?, ?)";
             $insertStmt = $conn->prepare($insertSql);
             $insertStmt->bind_param("iiis", $idUser, $productId, $rating, $content);
             $insertStmt->execute();
+
+            $hasReview = true;
         }
     }
-    echo "<script>alert('Đánh giá đã được gửi thành công!'); window.location.href='historyorder.php';</script>";
-    exit;
+    if($hasReview){
+        echo "<script>alert('Đánh giá đã được gửi thành công!'); window.location.href='historyorder.php';</script>";
+        exit;
+    } else {
+        echo "<script>alert('Vui lòng đánh giá ít nhất 1 sản phẩm!');</script>";
+    }
 }
 ?>
 <!DOCTYPE html>

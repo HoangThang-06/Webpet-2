@@ -1,41 +1,50 @@
-function showForm(formId) {
-  closeForms();
-  document.getElementById("overlay").classList.remove("hidden");
-  document.getElementById(formId).classList.remove("hidden");
+
+function openPopup() {
+    document.getElementById("donatePopup").style.display = "flex";
 }
-function closeForms() {
-  document.getElementById("donateForm").classList.add("hidden");   
-  document.getElementById("volunteerForm").classList.add("hidden"); 
-  document.getElementById("contactForm").classList.add("hidden"); 
-  document.getElementById("overlay").classList.add("hidden");      
+
+function closePopup() {
+    document.getElementById("donatePopup").style.display = "none";
 }
-function submitForm(event, formId) {
-  event.preventDefault();
-  alert("Đăng ký thành công! Chúng tôi sẽ liên hệ lại với bạn.");
-  document.getElementById(formId).querySelector("form").reset();
-  closeForms();
-}
-function copyToClipboard(elementId) {
-  var copyText = document.getElementById(elementId); 
-  var tempInput = document.createElement("input");
-  document.body.appendChild(tempInput);
-  tempInput.value = copyText.textContent || copyText.innerText;
-  tempInput.select();
-  document.execCommand("copy");
-  document.body.removeChild(tempInput);
-  alert("Số tài khoản đã được sao chép: " + tempInput.value);
-}
-document.addEventListener("DOMContentLoaded", function () {
-  let currentPage = window.location.pathname.split("/").pop();
-  if (!currentPage || currentPage === "index.html") {
-    currentPage = "trangchu.html";
-  }
-  document.querySelectorAll(".navbar-nav .nav-link").forEach(function (link) {
-    const href = link.getAttribute("href");
-    if (href === currentPage) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
+
+function generateQR() {
+    const amount = document.getElementById("amount").value;
+    let message = document.getElementById("message").value || "Ung ho cac be";
+
+    if (amount <= 0) {
+        alert("Vui lòng nhập số tiền hợp lệ!");
+        return;
     }
-  });
-});
+
+    const bankCode = "MB";
+    const accountNumber = "0001992546284";
+    const accountName = "PetRescueHub";
+
+    const qrURL =
+        `https://img.vietqr.io/image/${bankCode}-${accountNumber}-compact2.png` +
+        `?amount=${encodeURIComponent(amount)}` +
+        `&addInfo=${encodeURIComponent(message)}` +
+        `&accountName=${encodeURIComponent(accountName)}`;
+
+    document.getElementById("qrImage").src = qrURL;
+
+    // Hiện QR
+    document.getElementById("qrResult").style.display = "block";
+
+    // Hiện phần upload ảnh
+    document.getElementById("uploadSection").style.display = "block";
+
+    // Gắn dữ liệu vào input ẩn để gửi sang PHP
+    document.getElementById("hidden_amount").value = amount;
+    document.getElementById("hidden_message").value = message;
+}
+
+function confirmTransaction() {
+    let file = document.getElementById("receipt").files[0];
+    if (!file) {
+        alert("⚠️ Vui lòng tải ảnh biên lai lên!");
+        return;
+    }
+
+    document.getElementById("donateForm").submit();
+}

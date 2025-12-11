@@ -128,7 +128,7 @@ else {
             </div>
         </div>
         <form action="order_success.php" method="POST" id="orderForm">
-            <a href="cart.php" class="back-link">← Quay lại mua hàng</a>
+            <a href="products.php" class="back-link">← Quay lại mua hàng</a>
 
             <input type="hidden" name="total" value="<?= $total ?>">
             <input type="hidden" name="payment_method" id="payment_method">

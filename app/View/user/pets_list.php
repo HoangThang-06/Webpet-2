@@ -30,7 +30,9 @@ $sql .= " LIMIT $start, $limit";
 $result = $conn->query($sql);
 ?>
 <div class="pets-list">
-<?php while($pet = $result->fetch_assoc()): ?>
+<?php 
+if($result->num_rows>0){
+while($pet = $result->fetch_assoc()): ?>
   <div class="pet-item">
     <img src="<?= $pet['image'] ?>" alt="<?= htmlspecialchars($pet['name']) ?>">
     <div class="info">
@@ -41,7 +43,10 @@ $result = $conn->query($sql);
       <a href="get-pet.php?id=<?= $pet['id'] ?>" class="btn btn-info view-detail" style="margin:10px 0px">Xem chi tiết</a>
     </div>
   </div>
-<?php endwhile; ?>
+<?php endwhile;}
+else{
+    echo '<p>Không có pet nào</p>';
+} ?>
 </div>
 <div class="pagination">
 <?php

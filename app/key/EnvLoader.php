@@ -4,7 +4,6 @@ class EnvLoader {
         if (!file_exists($path)) {
             die("Không tìm thấy file .env!");
         }
-
         $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         foreach ($lines as $line) {

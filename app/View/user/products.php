@@ -11,6 +11,7 @@ $resultProduct=$conn->query($sqlProduct);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản phẩm</title>
+    <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png"> 
     <link rel="stylesheet" href="../../../public/css/products.css?v=<?php echo time(); ?>">
 </head>
 <body>

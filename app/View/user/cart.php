@@ -52,58 +52,7 @@ $cartData = $cartStmt->get_result();
 
     <div class="main-container">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="<?php 
-                        echo !empty($user['avatar']) ? $user['avatar'] : '../../../public/img/avatars/avtdefault.png'; 
-                    ?>" alt="Avatar" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
-                </div>
-                <div class="user-info">
-                    <div class="user-name"><?php echo $user['fullname']; ?></div>
-                    <div class="user-email"><?php echo $user['email']; ?></div>
-                </div>
-            </div>
-            <ul class="menu-list">
-                <li class="menu-item">
-                    <a href="profile.php" class="menu-link ">
-                        <i class="fas fa-user"></i>
-                        <span>Thông tin cá nhân</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="historyorder.php" class="menu-link">
-                        <i class="fas fa-bell"></i>
-                        <span>Lịch sử đơn hàng</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="cart.php" class="menu-link active">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Giỏ hàng</span>
-                        <?php
-                        $resultCount=mysqli_query($conn,"SELECT * FROM cart WHERE user_id=$idUser");
-                        $total=mysqli_num_rows($resultCount);
-                        if($total>0){
-                            echo '<span class="cart-badge">'.$total.'</span>';
-                        }
-                        ?>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="index.php" class="menu-link">
-                        <i class="fas fa-home"></i>
-                        <span>Trang chủ</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="../layout/logout.php" class="menu-link logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Đăng xuất</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+       <?php include('../layout/sidebar.php'); ?>
         <main class="main-content">
             <div class="content-wrapper">
                 <div class="header">

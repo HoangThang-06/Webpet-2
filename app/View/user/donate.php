@@ -4,44 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ủng hộ</title>
+  <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png"> 
   <link rel="stylesheet" href="../../../public/css/donate.css?v=<?php echo time(); ?>">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <div id="donatePopup" class="popup-overlay">
     <div class="popup-box">
-
         <form id="donateForm" action="upload_receipt.php" method="POST" enctype="multipart/form-data">
             <h2>Ủng hộ ngay</h2>
-            <label>Số tiền (VND)</label>
-            <input type="number" id="amount" placeholder="Ví dụ: 50000">
-            <label>Lời nhắn</label>
-            <input type="text" id="message" placeholder="Ví dụ: Ung ho cac be">
-            <p class="warning">
-                ⚠️ Vui lòng chuyển khoản <b>chính xác số tiền</b> và <b>nội dung</b> bên dưới.
-                Sau khi chuyển khoản, vui lòng chụp ảnh biên lai và tải lên.
-            </p>
-            <button type="button" class="btn-generate" onclick="generateQR()">Tạo mã QR</button>
-            <div id="qrResult" class="qr-area" style="display:none;">
-                <h3>Mã QR thanh toán</h3>
-                <img id="qrImage" src="">
+            <div class="inputSection">
+                <label>Số tiền (VND)</label>
+                <input type="number" id="amount" placeholder="Ví dụ: 50000">
+                <label>Lời nhắn</label>
+                <input type="text" id="message" placeholder="Ví dụ: Ung ho cac be">
+                <p class="warning" id="warning">
+                    ⚠️ Vui lòng chuyển khoản <b>chính xác số tiền</b> và <b>nội dung</b> bên dưới.
+                    Sau khi chuyển khoản, vui lòng chụp ảnh biên lai và tải lên.
+                </p>
+                <button type="button" class="btn-generate" id="btn-generate" onclick="generateQR()">Tạo mã QR</button>
+                <div id="qrResult" class="qr-area" style="display:none;">
+                    <h3>Mã QR thanh toán</h3>
+                    <img id="qrImage" src="">
+                </div>
+                <div class="upload-area" id="uploadSection" style="display:none;">
+                    <label>Tải ảnh biên lai lên:</label>
+                    <input type="file" name="receipt" id="receipt" accept="image/*">
+
+                    <input type="hidden" name="amount" id="hidden_amount">
+                    <input type="hidden" name="message" id="hidden_message">
+
+                    <button type="button" class="btn-confirm" onclick="confirmTransaction()">
+                        Xác nhận giao dịch
+                    </button>
+                </div>
             </div>
-            <div class="upload-area" id="uploadSection" style="display:none;">
-                <label>Tải ảnh biên lai lên:</label>
-                <input type="file" name="receipt" id="receipt" accept="image/*">
-
-                <input type="hidden" name="amount" id="hidden_amount">
-                <input type="hidden" name="message" id="hidden_message">
-
-                <button type="button" class="btn-confirm" onclick="confirmTransaction()">
-                    Xác nhận giao dịch
-                </button>
-            </div>
-
         </form>
         <button class="btn-close" onclick="closePopup()">Đóng</button>
     </div>
 </div>
-
-
 <body>
   <?php include('../layout/menu.php'); ?>
   <img class="img-banner" src="../../../public/img/donate.png" alt="Donate">
@@ -64,6 +64,18 @@
   <div class="donate-button-wrapper">
     <button onclick="openPopup()">Ủng hộ ngay</button>
   </div>
+    <div class="chart" style="padding:30px">
+        <div class="chart-filter">
+            <label>Chọn năm:</label>
+            <select id="yearSelect">
+                <option value="2025" selected>2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+            </select>
+        </div>
+        <div id="donationContent">
+        </div>
+    </div>
  <div class="other-donate">
     <h1>Các phương thức ủng hộ khác</h1>
     <div class="donate-icons">
@@ -85,5 +97,78 @@
     <?php include('../layout/footer.php'); ?>
   </footer>
   <script src="../../../public/scripts/donate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+let monthChart = null;
+function loadDonationReport(year, page = 1) {
+    $.get('chartdonation.php', { year: year, page: page }, function (data) {
+        $('#donationContent').html(data);
+        const canvas = document.getElementById('chartMonth');
+        if (canvas) {
+            const labels = JSON.parse(canvas.dataset.labels);
+            const values = JSON.parse(canvas.dataset.values);
+
+            if (monthChart !== null) {
+                monthChart.destroy();
+            }
+            const ctx = canvas.getContext('2d');
+            monthChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số tiền ủng hộ (VND)',
+                        data: values,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tháng',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#2c8f8d'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tổng số tiền (VND)',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#2c8f8d'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+}
+loadDonationReport($('#yearSelect').val());
+
+$('#yearSelect').on('change', function () {
+    loadDonationReport($(this).val());
+});
+
+$(document).on('click', '.page-link', function (e) {
+    e.preventDefault();
+    const page = $(this).data('page');
+    const year = $('#yearSelect').val();
+    loadDonationReport(year, page);
+});
+</script>
 </body>
 </html>

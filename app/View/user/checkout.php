@@ -23,21 +23,9 @@ if (isset($_GET['id'])) {
     }
 }
 else {
-
-    $sqlCart = "
-        SELECT 
-            c.id AS cart_id,
-            c.quantity,
-            p.id AS product_id,
-            p.name,
-            p.price,
-            p.image
-        FROM cart c
-        JOIN products p ON c.product_id = p.id
-        WHERE c.user_id = $idUser
-    ";
+    $sqlCart = "SELECT c.id AS cart_id,c.quantity,p.id AS product_id,p.name,p.price,p.image
+        FROM cart c JOIN products p ON c.product_id = p.id WHERE c.user_id = $idUser";
     $resultCart = $conn->query($sqlCart);
-
     while ($row = mysqli_fetch_assoc($resultCart)) {
         $cartItems[] = $row;
         $total += $row['price'] * $row['quantity'];
@@ -50,6 +38,7 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh toán</title>
+    <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../../../public/css/checkout.css">
 </head>
@@ -79,6 +68,11 @@ else {
                             <div>
                                 <h3>Chuyển khoản ngân hàng (Banking)</h3>
                                 <p>Chuyển khoản trực tiếp qua app ngân hàng</p>
+                                <div id="qrBox" style="display:none; margin-top:15px; text-align:center;">
+                                    <h4>Mã QR thanh toán</h4>
+                                    <img id="qrImage" src="" style="width:260px; border:1px solid #ccc; padding:10px; border-radius:10px;">
+                                    <p style="margin-top:10px; font-weight:bold;">Quét QR để thanh toán</p>
+                                </div>
                             </div>
                             <i class="fa-solid fa-building-columns pay_icon"></i>
                         </div>
@@ -148,5 +142,34 @@ else {
         </div>
     </div>
     <script src="../../../public/scripts/checkout.js"></script>
+    <script>
+    const paymentRadios = document.querySelectorAll("input[name='payment']");
+    const qrBox = document.getElementById("qrBox");
+    const qrImage = document.getElementById("qrImage");
+
+    const total = <?= $total ?>;
+    const username = "<?= urlencode($user['fullname']) ?>";
+    const donhang = "<?= urlencode( $item['name']) ?>";
+
+    paymentRadios.forEach(radio => {
+        radio.addEventListener("change", function() {
+            if (this.value === "Banking") {
+                let bank = "MB";
+                let bankNo = "0001992546284";
+                let bankName = "PetRescueHub";
+                let description = username + "+dat+don+hang+" + donhang;
+                let qrURL =
+                    `https://img.vietqr.io/image/${bank}-${bankNo}-compact2.png` +
+                    `?amount=${total}&addInfo=${description}&accountName=${bankName}`;
+                qrImage.src = qrURL;
+                qrBox.style.display = "block";
+            }
+            else {
+                qrBox.style.display = "none";
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

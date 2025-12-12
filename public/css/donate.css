@@ -160,9 +160,6 @@
     transform: rotate(-15deg); 
     scale:1.25;
 }
-
-
-/* Popup overlay */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -175,30 +172,34 @@
     align-items: center;
     z-index: 999;
 }
-
-/* Popup box */
 .popup-box {
     width: 380px;
+    max-height: 90vh;
+    overflow-y: auto;
     background: linear-gradient(135deg, #0a2a66, #0e4d92);
     color: white;
-    padding: 25px;
+    padding: 25px 20px;
     border-radius: 15px;
+    position: relative;
     box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    text-align: left;
     animation: fadeIn 0.3s ease-in-out;
 }
-
+.popup-box::-webkit-scrollbar {
+    width: 8px;
+}
+.popup-box::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 5px;
+}
 .popup-box h2 {
     text-align: center;
     margin-bottom: 15px;
 }
-
 .popup-box label {
     font-weight: bold;
     margin-top: 10px;
     display: block;
 }
-
 .popup-box input[type="number"],
 .popup-box input[type="text"],
 .popup-box input[type="file"] {
@@ -210,8 +211,6 @@
     margin-bottom: 10px;
     font-size: 15px;
 }
-
-/* Buttons */
 .btn-generate, .btn-confirm, .btn-close {
     width: 100%;
     padding: 12px;
@@ -222,23 +221,15 @@
     font-weight: bold;
     cursor: pointer;
 }
-
 .btn-generate {
     background: #22a6f2;
-    color: white;
 }
-
 .btn-confirm {
     background: #1bc47d;
-    color: white;
 }
-
 .btn-close {
     background: #d9534f;
-    color: white;
 }
-
-/* Warning text */
 .warning {
     background: #ffdddd;
     border-left: 5px solid #ff4444;
@@ -248,29 +239,115 @@
     font-size: 14px;
     margin-top: 10px;
 }
-
-/* QR area */
 .qr-area {
     display: none;
     text-align: center;
     margin-top: 15px;
 }
-
 .qr-area img {
     width: 200px;
     margin-top: 10px;
 }
-
-/* Upload area */
 .upload-area {
     background: rgba(255,255,255,0.1);
     padding: 15px;
     border-radius: 10px;
     margin-top: 15px;
 }
-
-/* Animation */
 @keyframes fadeIn {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+/*chart*/
+.chart-container { width: 80%; margin: 50px auto; } 
+table {
+    width: 80%;
+    margin: 25px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+}
+table thead th {
+    background: #2c8f8d;
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    border-right: 1px solid #1f6f6e;
+}
+table thead th:last-child {
+    border-right: none;
+}
+table tbody td {
+    padding: 10px 12px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
+}
+table tbody td:last-child {
+    border-right: none;
+}
+table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+table tbody tr:hover {
+    background: #e8f7f6;
+    transition: 0.2s;
+}
+.pagination { 
+    text-align: center; 
+    margin-top: 15px; 
+} 
+.pagination a { 
+    margin: 0 5px; 
+    text-decoration: none; padding: 5px 10px; 
+    border: 2px solid #0e0d0d; 
+    border-radius: 10px;
+} 
+.pagination a.active { 
+    font-weight: bold; 
+    background-color: #19d4cb; 
+}
+.chart-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    color: #2c8f8d;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+.chart-filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0 25px 0;
+    font-family: 'Poppins', sans-serif;
+}
+.chart-filter label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c8f8d;
+    border-bottom: 5px solid #2c8f8d;
+}
+.chart-filter select {
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 2px solid #2c8f8d;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.chart-filter select:hover {
+    border-color: #1e6e6b;
+    background: #f3fdfd;
+}
+.chart-filter select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(44, 143, 141, 0.4);
 }

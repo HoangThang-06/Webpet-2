@@ -12,6 +12,7 @@ if(!$resultartilce){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang chủ</title>
+  <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png"> 
   <link rel="stylesheet" href="../../../public/css/index.css?v=<?php echo time(); ?>">
 </head>
 <body>

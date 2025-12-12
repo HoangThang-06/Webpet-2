@@ -46,6 +46,7 @@ if (isset($_POST['update_account'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tài khoản</title>
+    <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../../public/css/ho.css">
     <link rel="stylesheet" href="../../../public/css/profile.css">
@@ -55,59 +56,9 @@ if (isset($_POST['update_account'])) {
     <button class="menu-toggle" onclick="toggleMenu()">
         <i class="fas fa-bars"></i>
     </button>
-
     <div class="main-container">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="<?php echo !empty($user['avatar']) ? $user['avatar'] : '../../../public/img/avatars/avtdefault.png'; ?>" alt="Avatar" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
-                </div>
-                <div class="user-info">
-                    <div class="user-name"><?php echo htmlspecialchars($user['fullname'] ?? ''); ?></div>
-                    <div class="user-email"><?php echo htmlspecialchars($user['email']); ?></div>
-                </div>
-            </div>
-            <ul class="menu-list">
-                <li class="menu-item">
-                    <a href="profile.php?id=<?php echo $idUser; ?>" class="menu-link active">
-                        <i class="fas fa-user"></i>
-                        <span>Thông tin tài khoản</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="historyorder.php?id=<?php echo $idUser; ?>" class="menu-link">
-                        <i class="fas fa-bell"></i>
-                        <span>Lịch sử đơn hàng</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="cart.php" class="menu-link">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Giỏ hàng</span>
-                        <?php
-                        $resultCount=mysqli_query($conn,"SELECT * FROM cart WHERE user_id=$idUser");
-                        $total=mysqli_num_rows($resultCount);
-                        if($total>0){
-                            echo '<span class="cart-badge">'.$total.'</span>';
-                        }
-                        ?>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="index.php" class="menu-link">
-                        <i class="fas fa-home"></i>
-                        <span>Trang chủ</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="../layout/logout.php" class="menu-link logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Đăng xuất</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+        <?php include ('../layout/sidebar.php'); ?>
 
         <main class="main-content">
             <div class="content-wrapper">
@@ -115,7 +66,6 @@ if (isset($_POST['update_account'])) {
                     <h1>👤 Thông tin tài khoản</h1>
                     <p>Xem và chỉnh sửa thông tin cá nhân của bạn</p>
                 </div>
-
                 <div class="account-box">
                     <div class="avatar-section">
                         <img id="avatarPreview" src="<?php echo !empty($user['avatar']) ? $user['avatar'] : '../../../public/img/avatars/avtdefault.png'; ?>" alt="Avatar">
@@ -148,7 +98,6 @@ if (isset($_POST['update_account'])) {
                                 <label>Ngày sinh</label>
                                 <input type="date" name="birthday" value="<?php echo $user['birthday']; ?>">
                             </div>
-
                             <div class="form-group">
                                 <label>Giới tính</label>
                                 <select name="gender">
@@ -157,7 +106,6 @@ if (isset($_POST['update_account'])) {
                                     <option value="Khác" <?php if($user['gender']=='Khác') echo 'selected'; ?>>Khác</option>
                                 </select>
                             </div>
-
                             <button class="btn btn-primary" type="submit" name="update_account" style="margin-top: 15px;">Lưu thay đổi</button>
                         </div>
                     </form>
@@ -165,19 +113,6 @@ if (isset($_POST['update_account'])) {
             </div>
         </main>
     </div>
-
     <script src="../../../public/scripts/ho.js"></script>
-    <script>
-        document.getElementById("avatarInput").addEventListener("change", function() {
-            const file = this.files[0];
-            if (file) {
-                document.getElementById("avatarPreview").src = URL.createObjectURL(file);
-            }
-        });
-
-        function toggleMenu() {
-            document.getElementById("sidebar").classList.toggle("active");
-        }
-    </script>
 </body>
 </html>

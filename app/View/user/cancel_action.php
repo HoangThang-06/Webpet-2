@@ -12,8 +12,6 @@ $id = $_GET['id'] ?? 0;
 if (!$id) {
     die("Thiếu tham số!");
 }
-
-// Chỉ xóa từ bảng adoption
 $sql = "DELETE FROM adoption WHERE id=? AND id_user=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $id, $idUser);

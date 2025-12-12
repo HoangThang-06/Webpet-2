@@ -6,31 +6,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-        body {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            height: 100vh;
-        }
-        .auth-box {
-            max-width: 420px;
-            margin: 80px auto;
-            padding: 35px;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0px 12px 30px rgba(0,0,0,0.15);
-            animation: fadeIn 0.6s ease;
-        }
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(20px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-        .auth-title {
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="../../../public/css/login.css" />    
 </head>
 <body>
 
@@ -51,15 +27,31 @@
 
         $controller=new UserController();
         $message=$controller->login($username,$password);
-        if($message=="error1"){
-            $message="Tài khoản không tồn tại";
-        }
-        elseif($message=="error2"){
-            $message="Mật khẩu không đúng";
-        }
-        else{
-            header('Location:../user/index.php');
-        }
+        switch ($message) {
+
+        case "error_user":
+            $error = "Tài khoản không tồn tại";
+            break;
+
+        case "error_password":
+            $error = "Mật khẩu không đúng";
+            break;
+
+        case "admin_disapproved":
+            $error = "Admin chưa được phê duyệt!";
+            break;
+
+        case "admin_ok":
+            header("Location: ../admin/home.php");
+            exit;
+
+        case "user":
+            header("Location: ../user/index.php");
+            exit;
+
+        default:
+            $error = "Đăng nhập thất bại!";
+    }
     }
 ?>
 
@@ -86,9 +78,9 @@
             </div>
         </div>
 
-        <?php if (!empty($message)): ?>
+        <?php if (!empty($error)): ?>
             <div class="alert alert-danger text-center">
-                <?php echo $message; ?>
+                <?php echo $error; ?>
             </div>
         <?php endif; ?>
         <?= $success_message ?>

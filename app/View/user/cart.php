@@ -6,7 +6,8 @@ session_start();
 </div>
 <?php unset($_SESSION['toast']); endif; ?>
 <?php 
-include ('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $idUser=$_SESSION['user']['id_user'];
 $sql = "SELECT * FROM users WHERE id_user=$idUser";
 $result = $conn->query($sql);
@@ -99,7 +100,7 @@ $user = mysqli_fetch_assoc($result);
                 $cartQuery = $conn->prepare("
                     SELECT c.id AS cart_id, c.quantity, c.create_at, p.name, p.price, p.image
                     FROM cart c
-                    JOIN products p ON c.product_id = p.id
+                    JOIN product p ON c.product_id = p.id
                     WHERE c.user_id = ?
                     ORDER BY c.create_at DESC
                 ");

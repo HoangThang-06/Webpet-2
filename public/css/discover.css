@@ -9,7 +9,6 @@
   font-size: 98px;
   letter-spacing: 2px;
 }
-
 /* Button Styles */
 .filter-buttons > button {
   border: 2px solid black;
@@ -26,7 +25,6 @@
 .filter-buttons > button:visited {
   background-color: #555;
 }
-
 /* Link Styles */
 .t1 {
   text-decoration: none;
@@ -43,22 +41,12 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 700; /* Bold */
 }
-
 .post-card:hover {
   color: rgb(8, 177, 250);
 }
 
 .post-card:hover .post-link {
   color: rgb(8, 177, 250);
-}
-
-/* Post List Styles */
-#post-list .col {
-  display: none;
-}
-
-#post-list .col.visible {
-  display: block;
 }
 
 /* Post Image Styles */
@@ -75,7 +63,6 @@
   font-weight: bold;
   font-size: 20px;
 }
-
 /* Post Link Styles */
 .post-link {
   text-decoration: none;
@@ -92,13 +79,11 @@
   color: #555;
   margin-bottom: 8px;
 }
-
 /* Load More Button Styles */
 .load-more-wrapper {
   text-align: center;
   margin-top: 20px;
 }
-
 .load-more-btn {
   background: none;
   border: none;
@@ -113,7 +98,6 @@
   margin-right: 6px;
   vertical-align: middle;
 }
-
 /* Custom Horizontal Rule */
 .custom-hr {
   border: none;
@@ -123,4 +107,3 @@
   margin: 20px auto; /* Centered with spacing */
   border-radius: 2px;
 }
-

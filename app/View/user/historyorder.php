@@ -1,6 +1,7 @@
 <?php
 session_start();
-include ('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $idUser=$_SESSION['user']['id_user'];
 $sql = "SELECT * FROM users WHERE id_user=$idUser";
 $result = $conn->query($sql);

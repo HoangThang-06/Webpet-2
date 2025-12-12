@@ -4,6 +4,13 @@ require_once __DIR__."/../model/DAO/ArticleDAO.php";
 require_once __DIR__."/DBConnection.php";
 class ArticleController{
 
+    private $ArticleDAO;
+
+    public function __construct(){
+        $conn=(new DBConnection())->getConnection();
+        $this->ArticleDAO = new ArticleDAO($conn);
+    }
+
     public function addArticle(){
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -79,10 +86,7 @@ class ArticleController{
     $article->setClick($click);
     $article->setCategory($category);
 
-    $conn = (new DBConnection())->getConnection();
-    $dao = new ArticleDAO($conn);
-
-    if ($dao->addArticle($article)) {
+    if ($this->ArticleDAO->addArticle($article)) {
         return "Thêm bài báo thành công";
     } else {
         return "Lỗi thêm bài báo vào database";
@@ -91,21 +95,15 @@ class ArticleController{
 
     // Hàm lấy tất cả bài báo
     public function getAllArticles() {
-        $conn = (new DBConnection())->getConnection();
-        $dao = new ArticleDAO($conn);
-
-        return $dao->getAllArticles();
+        return $this->ArticleDAO->getAllArticles();
     }
 
     public function getArticleById($id) {
-    $conn = (new DBConnection())->getConnection();
-    $dao = new ArticleDAO($conn);
-
     // Tăng lượt click
-    $dao->increaseClick($id);
+    $this->ArticleDAO->increaseClick($id);
 
     // Lấy bài viết
-    $article = $dao->getArticleById($id);
+    $article = $this->ArticleDAO->getArticleById($id);
     if (!$article) return null;
 
     // Đọc nội dung file TXT
@@ -121,11 +119,20 @@ class ArticleController{
     }
 
     public function getOtherArticles($id) {
-    $conn = (new DBConnection())->getConnection();
-    $dao = new ArticleDAO($conn);
-    $article=$dao->getOtherArticles($id);
+    $article=$this->ArticleDAO->getOtherArticles($id);
     return $article;
     }
+    
+    public function getTopArticle(){
+        return $this->ArticleDAO->getTopArticle();
+    }
 
+    public function deleteArticle($id) {
+    return $this->ArticleDAO->deleteArticle($id);
+    }
+
+    public function updateArticle($data) {
+    return $this->ArticleDAO->updateArticle($data);
+    }
 }
 ?>

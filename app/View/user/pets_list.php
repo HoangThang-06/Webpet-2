@@ -1,13 +1,14 @@
 <?php
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $type = $_GET['type'] ?? 'all';
 $search = $_GET['search'] ?? '';
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 12;
 $start = ($currentPage - 1) * $limit;
 
-$sqlCount = "SELECT COUNT(id) AS total FROM pets WHERE 1=1";
-$sql = "SELECT * FROM pets WHERE 1=1";
+$sqlCount = "SELECT COUNT(id_pet) AS total FROM pet WHERE 1=1";
+$sql = "SELECT * FROM pet WHERE 1=1";
 
 if ($type != 'all') {
     $sqlCount .= " AND species = '".mysqli_real_escape_string($conn, $type)."'";

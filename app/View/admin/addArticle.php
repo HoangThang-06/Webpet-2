@@ -4,114 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm bài báo</title>
-
     <!-- BOOTSTRAP 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- BOOTSTRAP ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Roboto', sans-serif;
-        }
-        .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            height: 100%;
-        }
-        .card-header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            text-align: center;
-            padding: 1.5rem 1rem;
-        }
-        .card-header h4 {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-        .card-body {
-            padding: 1.5rem;
-        }
-        .form-control {
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.9rem;
-        }
-        .form-control:focus {
-            border-color: #4facfe;
-            box-shadow: 0 0 0 0.15rem rgba(79, 172, 254, 0.25);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border: none;
-            border-radius: 8px;
-            padding: 0.6rem 1.5rem;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: transform 0.2s;
-        }
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        .input-group-text {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 8px 0 0 8px;
-            font-size: 0.9rem;
-        }
-        .alert {
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        .form-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        .form-text {
-            font-size: 0.8rem;
-        }
-        .intro-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-        .intro-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #555;
-        }
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            font-size: 0.9rem;
-        }
-        .feature-list li {
-            margin-bottom: 0.5rem;
-        }
-        .feature-list li i {
-            color: #4facfe;
-            margin-right: 0.5rem;
-        }
-        .feature-list strong {
-            font-weight: 500;
-        }
-        h5 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../public/css/addArticle.css" /> 
 </head>
 
 <body>
@@ -127,8 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<div class="container">
-    <div class="row g-3">
+<div class="conten">
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <?php include("../layout/menuadmin.php"); ?>
+    </div>
+    <div class="container row g-3">
         <!-- Bên trái: Form nhập dữ liệu -->
         <div class="col-md-6">
             <div class="card">
@@ -232,6 +135,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script>
+document.getElementById("toggleBtn").addEventListener("click", function () {
+    document.getElementById("sidebar").classList.toggle("collapsed");
+});
+</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../../public/css/discover.css" />
+    <link rel="stylesheet" href="../../../public/css/discover.css" />    
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,6 +31,7 @@
   </head>
   <body>
     <div>
+      <?php include ('../layout/menu.php'); ?>
       <div id="demo" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
@@ -98,7 +99,7 @@
 
         <div class="filter-buttons">
           <button type="button" data-value="all" class="active">Tất cả</button>
-          <button type="button" data-value="nb">Nổi Bật</button>
+          <button type="button" data-value="hot">Nổi Bật</button>
           <button type="button" data-value="cm">Chó và Mèo</button>
           <button type="button" data-value="k">Khác</button>
         </div>
@@ -108,44 +109,44 @@
         <hr class="custom-hr" />
 
         <!--pham tin tuc-->
-            <div class="row row-cols-1 row-cols-md-2 g-4" id="post-list">
-        <?php 
-            require_once __DIR__. '/../../controller/Article_ctr.php';
+          <div class="row row-cols-1 row-cols-md-2 g-4" id="post-list">
+          <?php 
+              require_once __DIR__. '/../../controller/Article_ctr.php';
 
-            $articleCtr = new ArticleController();
-            $articles = $articleCtr->getAllArticles();
+              $articleCtr = new ArticleController();
+              $articles = $articleCtr->getAllArticles();
 
-            if (!empty($articles)) {
-                foreach ($articles as $row) {
+              if (!empty($articles)) {
+                  foreach ($articles as $row) {
 
-                    $id_article = $row['id_article'];
-                    $title = htmlspecialchars($row['title']);
-                    $date_post = date('d/m/Y', strtotime($row['create_at']));
-                    $image = htmlspecialchars($row['image']);
-                    $category = htmlspecialchars($row['category']);
-                    $data_click = intval($row['click']);
-                    $link = "articles.php?id=" . $id_article;
-                    ?>
-                    
-                    <div class="col" data-category="<?= $category ?>" data-click="<?= $data_click ?>">
-                        <a href="<?= $link ?>" class="t1 text-decoration-none">
-                            <div class="post-card">
-                                <div>
-                                    <div class="post-date"><?= $date_post ?></div>
-                                    <div class="post-title"><?= $title ?></div>
-                                </div>
-                                <img src="<?= $image ?>" alt="Ảnh bài viết" class="post-img" />
-                            </div>
-                        </a>
-                    </div>
+                      $id_article = $row['id_article'];
+                      $title = htmlspecialchars($row['title']);
+                      $date_post = date('d/m/Y', strtotime($row['create_at']));
+                      $image = htmlspecialchars($row['image']);
+                      $category = htmlspecialchars($row['category']);
+                      $click=$row["click"];
+                      $link = "articles.php?id=" . $id_article;
+                      ?>
+                      
+                      <div class="col" data-category="<?= $category ?>" data-click="<?= $click ?>">
+                          <a href="<?= $link ?>" class="t1 text-decoration-none">
+                              <div class="post-card">
+                                  <div>
+                                      <div class="post-date"><?= $date_post ?></div>
+                                      <div class="post-title"><?= $title ?></div>
+                                  </div>
+                                  <img src="<?= $image ?>" alt="Ảnh bài viết" class="post-img" />
+                              </div>
+                          </a>
+                      </div>
 
-                    <?php
-                }
-            } else {
-                echo "<p>Chưa có bài viết nào.</p>";
-            }
-        ?>
-      </div>
+                      <?php
+                  }
+              } else {
+                  echo "<p>Chưa có bài viết nào.</p>";
+              }
+          ?>
+        </div>
         <!-- NÚT HIỂN THỊ THÊM -->
         <div class="load-more-wrapper pb-5">
           <button id="load-more" class="load-more-btn">
@@ -155,7 +156,7 @@
       </div>
   <?php include('../layout/footer.php'); ?>
     </div>
-    <script src="../../../public/scripts/khampham.js"></script>
+    <script src="../../../public/scripts/khampha.js"></script>
   </body>
 </html>
 

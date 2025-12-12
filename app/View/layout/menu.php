@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $userSession = $_SESSION['user'] ?? null;
 $isLogin = $userSession ? true : false;
 $avatar = "../../../public/img/avatars/avtdefault.png";
@@ -19,7 +20,7 @@ if ($isLogin) {
     }
     $id = $userSession['id_user'];
 
-    $stmt = $conn->prepare("SELECT COUNT(id) AS total FROM cart WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT COUNT(id_cart) AS total FROM cart WHERE user_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();

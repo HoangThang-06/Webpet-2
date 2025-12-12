@@ -2,8 +2,8 @@
 class DBConnection{
     private $host = "localhost";
     private $username="root";
-    private $password="1905";
-    private $database="webpet";
+    private $password="";
+    private $database="projectweb";
     private $conn;
 
     public function getConnection(){

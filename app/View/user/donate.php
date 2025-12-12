@@ -22,45 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="trangchu.html">
-          <img
-            src="imgkhampha/logo.png"
-            class="logo"
-            style="width: 40px; height: 40px; margin-right: 10px"
-          />
-          <span class="text-dark fw-bold">PetRescue Hub</span>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="trangchu.html">Trang Chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="nhannuoi.html">Nhận Nuôi</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="khampha.html">Khám Phá</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="donate.html">Donate</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php include ('../layout/menu.php'); ?>
     <h1
       style="
         text-align: center;

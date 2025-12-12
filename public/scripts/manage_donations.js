@@ -3,11 +3,9 @@ function openPopup(filename) {
     document.getElementById("popup-img").src = imgPath;
     document.getElementById("popup").style.display = "flex";
 }
-
 function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
-
 function updateStatus(id, status) {
     let actionText="";
     if(status=="approved"){

@@ -80,12 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var articleId = $(this).data("id");
 
     $.post(
-      "delete_article.php",
-      { id: articleId },
+      "/app/controller/ArticleAPI.php",
+      { action: "delete", id: articleId },
       function (response) {
         alert(response.message);
         if (response.success) {
-          // Xóa luôn thẻ HTML của bài báo để không cần reload
           $(`.btn-delete[data-id='${articleId}']`)
             .closest(".employee-item")
             .remove();
@@ -191,9 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var newImage = $("#editImage")[0].files[0];
     if (newImage) formData.append("image", newImage);
     else formData.append("image_old", currentArticleData.image); // gửi image cũ nếu không đổi
+    formData.append("action", "update");
 
     $.ajax({
-      url: "update_article.php",
+      url: "/app/controller/ArticleAPI.php",
       type: "POST",
       data: formData,
       contentType: false,
@@ -202,10 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
       success: function (response) {
         alert(response.message);
         if (response.success) location.reload();
-      },
-      error: function (xhr) {
-        console.log("AJAX ERROR:", xhr.responseText);
-        alert("Có lỗi xảy ra khi cập nhật bài báo.");
       },
     });
   });

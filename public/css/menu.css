@@ -172,3 +172,13 @@
       display: flex;
     }
   } 
+  /* Khi menu mobile active, đổi màu và đậm chữ các link */
+.menu-container.active nav a {
+    color: #007bff;    /* Màu nổi bật */
+    font-weight: 700;   /* Chữ đậm */
+}
+
+/* Có thể thêm hover riêng cho active */
+.menu-container.active nav a:hover {
+    color: #0056b3;    /* Màu đậm hơn khi hover */
+}

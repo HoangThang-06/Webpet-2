@@ -1,37 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("search").addEventListener("keyup", function () {
-    let keyword = this.value.toLowerCase().trim();
-    let items = document.querySelectorAll(".employee-item");
+  function filterUsers() {
+    let keyword = document.getElementById("search").value.toLowerCase().trim();
 
-    items.forEach((item) => {
-      let username = item.getAttribute("data-username").toLowerCase();
+    let roleFilter = document.getElementById("filterRole").value;
 
-      item.style.display = username.includes(keyword) ? "flex" : "none";
+    document.querySelectorAll(".employee-item").forEach((item) => {
+      let username = item.dataset.username.toLowerCase();
+      let role = item.dataset.role;
+
+      let matchKeyword = username.includes(keyword);
+      let matchRole = roleFilter === "" || role === roleFilter;
+
+      item.style.display = matchKeyword && matchRole ? "flex" : "none";
     });
-  });
+  }
 
-  // lọc
-  // Lọc theo tên + role
-  $(document).ready(function () {
-    function filterUsers() {
-      let keyword = $("#search").val().toLowerCase();
-      let roleFilter = $("#filterRole").val();
-
-      $(".employee-item").each(function () {
-        let username = $(this).data("username").toLowerCase();
-        let role = $(this).find(".employee-info").text().toLowerCase();
-
-        let matchKeyword = username.includes(keyword);
-        let matchRole =
-          roleFilter === "" || role.includes(roleFilter.toLowerCase());
-
-        $(this).toggle(matchKeyword && matchRole);
-      });
-    }
-
-    $("#search").on("input", filterUsers);
-    $("#filterRole").on("change", filterUsers);
-  });
+  document.getElementById("search").addEventListener("input", filterUsers);
+  document.getElementById("filterRole").addEventListener("change", filterUsers);
 
   /* ===== BIỂU ĐỒ CỘT ROLE ===== */
   const ctx = document.getElementById("employeeChart").getContext("2d");

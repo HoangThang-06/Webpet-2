@@ -1,7 +1,0 @@
-CREATE TABLE phonghoc (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    sophong VARCHAR(20) NOT NULL,
-    cochongoi INT NOT NULL
-);
-

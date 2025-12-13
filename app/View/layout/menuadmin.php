@@ -95,6 +95,7 @@
             <li><a href="../admin/home.php"><i class="bi bi-pencil-square"></i>Trang chủ</a></li>
             <li><a href="../admin/manage.php"><i class="bi bi-person-plus-fill"></i>Quản lý người dùng </a></li>
             <li><a href="../admin/manageArticle.php"><i class="bi bi-pencil-square"></i>Quản lý bài báo</a></li>
+            <li><a href="../admin/managePet.php"><i class="bi bi-pencil-square"></i>Quản lý Pet</a></li>
             <li><a href="../admin/addArticle.php"><i class="bi bi-trash3-fill"></i>Thêm bài báo</a></li>
             <li><a href="../admin/addPet.php"><i class="bi bi-trash3-fill"></i>Thêm Pet</a></li>
             <li><a href="../admin/acc.php"><i class="bi bi-bar-chart-line-fill"></i>Tài khoản</a></li>

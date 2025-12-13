@@ -12,6 +12,10 @@ class PetController{
         $this->dao = new PetDAO($conn);
     }
 
+    public function getAllPets() {
+    return $this->dao->getAllPets();
+    }
+
     public function getTopPet(){
         return $this->dao->getTopPet();
     }
@@ -69,6 +73,88 @@ class PetController{
             return ["status" => "error", "message" => "Thêm thất bại"];
         }
     }
+    public function handleDeletePetAPI() {
+        $id = $_POST["id"] ?? null;
+        $image = $_POST["image"] ?? null;
 
+        if (!$id) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Thiếu ID pet"
+            ]);
+            return;
+        }
+
+        if (!empty($image)) {
+            $imagePath = $_SERVER["DOCUMENT_ROOT"] . $image;
+
+            if (file_exists($imagePath) && strpos($image, "avtdefault") === false) {
+                unlink($imagePath);
+            }
+        }
+
+        $result = $this->dao->deletePet($id);
+
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Xóa pet thành công" : "Xóa pet thất bại"
+        ]);
+    }
+
+
+ public function handleUpdatePetAPI() {
+    $id = $_POST["id_pet"] ?? null;
+
+    if (!$id) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Thiếu ID pet"
+        ]);
+        return;
+    }
+
+    $imageOld = $_POST["image_old"] ?? "";
+
+    $data = [
+        "id_pet"      => $id,
+        "name_pet"    => $_POST["name_pet"] ?? "",
+        "gender"      => $_POST["gender"] ?? "",
+        "state"       => $_POST["state"] ?? "",
+        "description" => $_POST["description"] ?? "",
+        "image"       => $imageOld
+    ];
+
+    /* ===== UPLOAD ẢNH MỚI ===== */
+    if (!empty($_FILES["image"]["name"])) {
+        $uploadDir = $_SERVER["DOCUMENT_ROOT"] . "/public/img/pet/";
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = time() . "_" . basename($_FILES["image"]["name"]);
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
+
+            // ===== XÓA ẢNH CŨ =====
+            if (!empty($imageOld)) {
+                $oldPath = $_SERVER["DOCUMENT_ROOT"] . $imageOld;
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+
+            $data["image"] = "/public/img/pet/" . $fileName;
+        }
+    }
+
+    $result = $this->dao->updatePet($data);
+
+    echo json_encode([
+        "success" => $result,
+        "message" => $result ? "Cập nhật thành công" : "Cập nhật thất bại"
+    ]);
+}
 }
 ?>

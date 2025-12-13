@@ -12,6 +12,7 @@ $resultProduct=$conn->query($sqlProduct);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản phẩm</title>
+    <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png"> 
     <link rel="stylesheet" href="../../../public/css/products.css?v=<?php echo time(); ?>">
 </head>
 <body>
@@ -21,11 +22,11 @@ $resultProduct=$conn->query($sqlProduct);
         </div>
     <div class="container">
         <div class="image-stack">
-            <img src="../../../public/img/Header-product.jpg" class="item small">
-            <img src="../../../public/img/Header-product.jpg" class="item medium">
-            <img src="../../../public/img/Header-product.jpg" class="item large">
-            <img src="../../../public/img/Header-product.jpg" class="item medium">
-            <img src="../../../public/img/Header-product.jpg" class="item small">
+            <img src="../../../public/img/small1.jpg" class="item small">
+            <img src="../../../public/img/midleimg1.jpg" class="item medium">
+            <img src="../../../public/img/bigimg.jpg" class="item large">
+            <img src="../../../public/img/midleimg2.jpg" class="item medium">
+            <img src="../../../public/img/small2.jpg" class="item small">
         </div>  
         <div class="cardnew">
             <h2>Sản phẩm mới:</h2>

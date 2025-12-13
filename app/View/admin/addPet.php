@@ -76,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </label>
                             <select name="gender" class="form-select" required>
                                 <option value="">-- Chọn giới tính --</option>
-                                <option value="Đực">Đực</option>
-                                <option value="Cái">Cái</option>
+                                <option value="male">Đực</option>
+                                <option value="female">Cái</option>
                             </select>
                         </div>
 

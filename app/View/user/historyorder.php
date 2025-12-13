@@ -13,69 +13,18 @@ $user = mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch Sử Đơn Hàng</title>
+    <link rel="icon" type="image/png" href="../../../public/icon/pawprint.png"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../../public/css/ho.css"></link>
+    <link rel="stylesheet" href="../../../public/css/ho.css?v=<?php echo time(); ?>"></link>
     <link rel="stylesheet" href="../../../public/css/cart.css"></link>
 </head>
 <body>
     <button class="menu-toggle" onclick="toggleMenu()">
         <i class="fas fa-bars"></i>
     </button>
-
     <div class="main-container">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="<?php 
-                        echo !empty($user['avatar']) ? $user['avatar'] : '../../../public/img/avatars/avtdefault.png'; 
-                    ?>" alt="Avatar" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
-                </div>
-                <div class="user-info">
-                    <div class="user-name"><?php echo $user['fullname']; ?></div>
-                    <div class="user-email"><?php echo $user['email']; ?></div>
-                </div>
-            </div>
-            <ul class="menu-list">
-                <li class="menu-item">
-                    <a href="profile.php" class="menu-link ">
-                        <i class="fas fa-user"></i>
-                        <span>Thông tin cá nhân</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="historyorder.php" class="menu-link active">
-                        <i class="fas fa-bell"></i>
-                        <span>Lịch sử đơn hàng</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="cart.php" class="menu-link">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Giỏ hàng</span>
-                        <?php
-                        $resultCount=mysqli_query($conn,"SELECT * FROM cart WHERE user_id=$idUser");
-                        $total=mysqli_num_rows($resultCount);
-                        if($total>0){
-                            echo '<span class="cart-badge">'.$total.'</span>';
-                        }
-                        ?>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="index.php" class="menu-link">
-                        <i class="fas fa-home"></i>
-                        <span>Trang chủ</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="../layout/logout.php" class="menu-link logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Đăng xuất</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+        <?php include('../layout/sidebar.php'); ?>
         <!-- Main Content -->
         <main class="main-content">
             <div class="content-wrapper">
@@ -84,16 +33,22 @@ $user = mysqli_fetch_assoc($result);
                     <p>Quản lý và theo dõi tất cả đơn hàng của bạn</p>
                 </div>
                 <div class="filters">
-                    <button class="filter-btn active">Tất cả</button>
-                    <button class="filter-btn">Đang xử lý</button>
-                    <button class="filter-btn">Đang giao</button>
-                    <button class="filter-btn">Hoàn thành</button>
-                    <button class="filter-btn">Đã hủy</button>
+                    <a href="historyorder.php?filter=all" class="filter-btn <?= ($_GET['filter'] ?? 'all')=='all'?'active':'' ?>">Tất cả</a>
+                    <a href="historyorder.php?filter=7" class="filter-btn <?= ($_GET['filter'] ?? '')=='7'?'active':'' ?>">7 Ngày</a>
+                    <a href="historyorder.php?filter=15" class="filter-btn <?= ($_GET['filter'] ?? '')=='15'?'active':'' ?>">15 Ngày</a>
+                    <a href="historyorder.php?filter=30" class="filter-btn <?= ($_GET['filter'] ?? '')=='30'?'active':'' ?>">1 Tháng</a>
+                    <a href="historyorder.php?filter=180" class="filter-btn <?= ($_GET['filter'] ?? '')=='180'?'active':'' ?>">6 Tháng</a>
                 </div>
-
                 <div class="orders-list">
                 <?php
-                $orderQuery = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+                $filter = $_GET['filter'] ?? 'all';
+                $sql = "SELECT * FROM orders WHERE user_id = ? ";
+                if ($filter != 'all') {
+                    $days = intval($filter);
+                    $sql .= " AND created_at >= DATE_SUB(NOW(), INTERVAL $days DAY) ";
+                }
+                $sql .= " ORDER BY created_at DESC";
+                $orderQuery = $conn->prepare($sql);
                 $orderQuery->bind_param("i", $idUser);
                 $orderQuery->execute();
                 $orderResult = $orderQuery->get_result();
@@ -111,7 +66,7 @@ $user = mysqli_fetch_assoc($result);
                     }
                     $itemsQuery->execute();
                     $itemsResult = $itemsQuery->get_result();
-                ?>
+                    ?>
                     <div class="order-card">
                         <div class="order-header">
                             <div>
@@ -134,7 +89,6 @@ $user = mysqli_fetch_assoc($result);
                                 </div>
                             <?php endwhile; ?>
                         </div>
-
                         <div class="order-footer">
                             <div>
                                 <span class="total-label">Tổng tiền:</span>
@@ -142,7 +96,7 @@ $user = mysqli_fetch_assoc($result);
                             </div>
                             <div class="action-buttons">
                                 <a href="add-review.php?order_id=<?= $order['order_id'] ?>" class="btn btn-primary">Đánh giá</a>
-                                <a href="#" class="btn btn-secondary">Mua lại</a>
+                                <a href="reorder.php?order_id=<?= $order['order_id'] ?>" class="btn btn-secondary">Mua lại</a>
                             </div>
                         </div>
                     </div>
@@ -151,7 +105,6 @@ $user = mysqli_fetch_assoc($result);
             </div>
         </main>
     </div>
-
     <script src="../../../public/scripts/ho.js"></script>
 </body>
 </html>

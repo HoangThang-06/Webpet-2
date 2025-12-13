@@ -43,7 +43,7 @@ class UserController{
             return $messeger;
         }
         
-    }
+        }
 
     public function resetpw_ctr($email, $newpw) {
     if ($this->userDAO->resetpw($email, $newpw)) {
@@ -60,44 +60,6 @@ class UserController{
     public function deleteUser($id){
         return $this->userDAO->deleteUser($id);
     }
-
-    // //Sửa thông tin người dùng 
-    // public function updateUser(
-    //     $id_user,
-    //     $username,
-    //     $fullname,
-    //     $phone,
-    //     $birthday,
-    //     $gender,
-    //     $address,
-    //     $avatar,
-    //     $password,
-    //     $role,
-    //     $email,
-    //     $status
-    // ) {
-
-    //     // 2. Gộp dữ liệu mới với dữ liệu cũ
-    //     $user = [
-    //         "id_user"   => $id_user,
-    //         "username"  => $username,    
-    //         "fullname"  => $fullname,
-    //         "phone"     => $phone,
-    //         "birthday"  => $birthday,
-    //         "gender"    => $gender,
-    //         "address"   => $address,
-    //         "avatar"    => $avatar,
-    //         "password"  => $password,
-    //         "role"      => $role,
-    //         "email"     => $email,
-    //         "status"    => $status
-    //     ];
-
-    //     // 3. Trả về DAO — gửi FULL DATA
-    //     return $this->userDAO->updateUser($user);
-    // }
-
-
 
     public function getUserRegistrationByMonth(){
         return $this->userDAO->getUserRegistrationByMonth();
@@ -132,7 +94,7 @@ class UserController{
         "success" => $result,
         "message" => $result ? "Xóa thành công" : "Xóa thất bại"
     ]);
-}
+    }
 
 public function handleUpdateUserAPI() {
 
@@ -151,7 +113,7 @@ public function handleUpdateUserAPI() {
     }
 
     // Avatar cũ từ DB
-    $oldAvatar = $oldUser["avatar"];   // ../../../public/img/avatars/xxxx.jpg
+    $oldAvatar = $oldUser["avatar"];
     $oldAvatarFile = null;
 
     // Nếu avatar cũ tồn tại thì convert sang đường dẫn thật

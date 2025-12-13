@@ -62,5 +62,39 @@ class PetDAO{
         }
         return null;
     }
+
+    // Lấy tất cả pet
+    public function getAllPets() {
+    $sql = "SELECT * FROM pet ORDER BY id_pet DESC";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->get_result(); // Lấy kết quả từ prepared statement
+    $pets = [];
+    while ($row = $result->fetch_assoc()) {
+        $pets[] = $row; // Lưu từng bản ghi vào mảng
+    }
+    return $pets;
+    }
+
+        //update pet
+    public function updatePet($data) {
+        $sql = "UPDATE pet 
+                SET name_pet = ?, gender = ?, state = ?, description = ?, image = ?
+                WHERE id_pet = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param(
+            "sssssi",
+            $data["name_pet"],
+            $data["gender"],
+            $data["state"],
+            $data["description"],
+            $data["image"],
+            $data["id_pet"]
+        );
+
+        return $stmt->execute();
+    }
 }
 ?>

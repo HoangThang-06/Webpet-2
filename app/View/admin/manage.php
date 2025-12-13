@@ -26,7 +26,7 @@ session_start();
         <!-- Tìm kiếm và lọc -->
         <div class="search-row">
             <input type="text" name="search" id="search" placeholder="Nhập tên người dùng" class="form-control ms-2">
-            <button type="submit" class="btn btn-primary ms-2">Tìm kiếm</button>
+            <button type="button" class="btn btn-primary ms-2">Tìm kiếm</button>
 
             <select id="filterRole" class="form-select form-select-sm ms-2" style="width: 150px;">
                 <option value="">Tất cả vai trò</option>
@@ -54,8 +54,10 @@ session_start();
                         : "../../../public/img/avatars/avtdefault.png"; // ảnh mặc định
             ?>
             
-            <div class="employee-item" data-username="<?= htmlspecialchars($emp["username"]) ?>">
-                <!-- LEFT: Avatar + Info -->
+            <div class="employee-item"
+                data-username="<?= htmlspecialchars($emp["username"]) ?>"
+                data-role="<?= htmlspecialchars($emp["role"]) ?>">
+                            <!-- LEFT: Avatar + Info -->
                 <div class="employee-left">
                     <img src="<?= $avatar ?>" class="employee-avatar" alt="avatar">
 

@@ -2,6 +2,20 @@
 session_start();
 include ('../../controller/dbconnect.php');
 $idUser=$_SESSION['user']['id_user'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['status'])) {
+    $orderId = intval($_POST['order_id']);
+    $status  = $_POST['status'];
+    $allowStatus = ['cancelled', 'completed'];
+    if (!in_array($status, $allowStatus)) {
+        die("Trạng thái không hợp lệ");
+    }
+    $stmt = $conn->prepare("UPDATE orders SET status = ? WHERE order_id = ? AND user_id = ?");
+    $stmt->bind_param("sii", $status, $orderId, $idUser);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: historyorder.php");
+    exit;
+}
 $sql = "SELECT * FROM users WHERE id_user=$idUser";
 $result = $conn->query($sql);
 $user = mysqli_fetch_assoc($result);    
@@ -32,23 +46,26 @@ $user = mysqli_fetch_assoc($result);
                     <p>Quản lý và theo dõi tất cả đơn hàng của bạn</p>
                 </div>
                 <div class="filters">
-                    <a href="historyorder.php?filter=all" class="filter-btn <?= ($_GET['filter'] ?? 'all')=='all'?'active':'' ?>">Tất cả</a>
-                    <a href="historyorder.php?filter=7" class="filter-btn <?= ($_GET['filter'] ?? '')=='7'?'active':'' ?>">7 Ngày</a>
-                    <a href="historyorder.php?filter=15" class="filter-btn <?= ($_GET['filter'] ?? '')=='15'?'active':'' ?>">15 Ngày</a>
-                    <a href="historyorder.php?filter=30" class="filter-btn <?= ($_GET['filter'] ?? '')=='30'?'active':'' ?>">1 Tháng</a>
-                    <a href="historyorder.php?filter=180" class="filter-btn <?= ($_GET['filter'] ?? '')=='180'?'active':'' ?>">6 Tháng</a>
+                    <a href="historyorder.php?filter=all" class="filter-btn <?= ($_GET['filter'] ?? 'all') == 'all' ? 'active' : '' ?>">Tất cả</a>
+                    <a href="historyorder.php?filter=processing" class="filter-btn <?= ($_GET['filter'] ?? '') == 'processing' ? 'active' : '' ?>">Đang xử lý</a>
+                    <a href="historyorder.php?filter=shipping" class="filter-btn <?= ($_GET['filter'] ?? '') == 'shipping' ? 'active' : '' ?>">Đang giao</a>
+                    <a href="historyorder.php?filter=completed"class="filter-btn <?= ($_GET['filter'] ?? '') == 'completed' ? 'active' : '' ?>">Hoàn tất</a>
+                    <a href="historyorder.php?filter=cancelled"class="filter-btn <?= ($_GET['filter'] ?? '') == 'cancelled' ? 'active' : '' ?>">Đã hủy</a>
                 </div>
                 <div class="orders-list">
                 <?php
                 $filter = $_GET['filter'] ?? 'all';
-                $sql = "SELECT * FROM orders WHERE user_id = ? ";
+                $sql = "SELECT * FROM orders WHERE user_id = ?";
                 if ($filter != 'all') {
-                    $days = intval($filter);
-                    $sql .= " AND created_at >= DATE_SUB(NOW(), INTERVAL $days DAY) ";
+                    $sql .= " AND status = ?";
                 }
                 $sql .= " ORDER BY created_at DESC";
                 $orderQuery = $conn->prepare($sql);
-                $orderQuery->bind_param("i", $idUser);
+                if ($filter != 'all') {
+                    $orderQuery->bind_param("is", $idUser, $filter);
+                } else {
+                    $orderQuery->bind_param("i", $idUser);
+                }
                 $orderQuery->execute();
                 $orderResult = $orderQuery->get_result();
                 while ($order = $orderResult->fetch_assoc()):
@@ -94,8 +111,24 @@ $user = mysqli_fetch_assoc($result);
                                 <span class="total-price"><?= number_format($total, 0, ',', '.') ?>₫</span>
                             </div>
                             <div class="action-buttons">
+                            <?php if ($order['status'] == 'processing'): ?>
+                                <form method="POST" action="" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
+                                    <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                                    <input type="hidden" name="status" value="cancelled">
+                                    <button type="submit" class="btn btn-danger">Hủy đơn hàng</button>
+                                </form>
+                            <?php elseif ($order['status'] == 'shipping'): ?>
+                                <form method="POST" action="" onsubmit="return confirm('Xác nhận đã nhận được hàng?');">
+                                    <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                                    <input type="hidden" name="status" value="completed">
+                                    <button type="submit" class="btn btn-success">Đã nhận được hàng</button>
+                                </form>
+                            <?php elseif ($order['status'] == 'completed'): ?>
                                 <a href="add-review.php?order_id=<?= $order['order_id'] ?>" class="btn btn-primary">Đánh giá</a>
                                 <a href="reorder.php?order_id=<?= $order['order_id'] ?>" class="btn btn-secondary">Mua lại</a>
+                            <?php elseif ($order['status']=='cancelled'): ?>
+                                <a href="reorder.php?order_id=<?= $order['order_id'] ?>" class="btn btn-secondary">Mua lại</a>
+                            <?php endif; ?>    
                             </div>
                         </div>
                     </div>

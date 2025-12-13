@@ -3,7 +3,6 @@
     align-items: center;
     gap: 5px;
 }
-
 .item-quantity-controls button {
     width: 30px;
     height: 30px;
@@ -15,11 +14,9 @@
     border-radius: 4px;
     transition: background-color 0.2s;
 }
-
 .item-quantity-controls button:hover {
     background-color: #e0e0e0;
 }
-
 .item-quantity-controls .quantity-input {
     width: 50px;
     height: 30px;
@@ -46,7 +43,6 @@
     background-color: #e63946;
     color: #fff;
 }
-
 .btn-danger:hover {
     background-color: #c53030;
 }
@@ -54,11 +50,9 @@
     background-color: #0ea5e9;
     color: #fff;
 }
-
 .btn-info:hover {
     background-color: #0284c7;
 }
-/* Box tổng tiền */
 .cart-total-box {
     margin-top: 20px;
     padding: 18px 25px;
@@ -70,19 +64,15 @@
     align-items: center;
     font-size: 18px;
 }
-
-/* Text tổng tiền */
 .cart-total-left {
     display: flex;
     gap: 10px;
     align-items: center;
 }
-
 .cart-total-left .label {
     font-weight: 600;
     color: #444;
 }
-
 .cart-total-left .value {
     font-weight: 700;
     color: #e63946;
@@ -98,7 +88,6 @@
     font-weight: 600;
     transition: 0.25s ease;
 }
-
 .btn-checkout-all:hover {
     background: #ff8f2f;
     transform: translateY(-2px);
@@ -117,8 +106,8 @@
 }
 .cart-badge {
   position: absolute;
-  top: -8px;         /* vị trí trên cùng */
-  right: -8px;       /* lệch sang phải */
+  top: -8px;
+  right: -8px;
   background-color: red;
   color: white;
   border-radius: 50%;
@@ -130,7 +119,6 @@
 .toast.success { background-color: #28a745; }
 .toast.error { background-color: #dc3545; }
 .toast.info { background-color: #17a2b8; }
-
 @keyframes fadeOut {
     0% { opacity: 0.95; }
     70% { opacity: 0.95; }

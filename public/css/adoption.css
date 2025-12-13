@@ -1,133 +1,132 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Nunito", sans-serif; }
-        .image-box {
-        position: relative;
-        display: inline-block;
-        }
+.image-box {
+position: relative;
+display: inline-block;
+}
+.image-box img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+.container-text{
+    padding: 40px 200px;
+    display: flex;
+}
+.adoption-title{
+    padding : 0px 0px 15px 15px;
+    font-size: 40px;
+}
+.adoption-intro{
+    font-size: 18px;
+    color: gray;
+    padding-bottom: 20px;
 
-        .image-box img {
-            width: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .container-text{
-            padding: 40px 200px;
-            display: flex;
-        }
-        .adoption-title{
-            padding : 0px 0px 15px 15px;
-            font-size: 40px;
-        }
-        .adoption-intro{
-            font-size: 18px;
-            color: gray;
-            padding-bottom: 20px;
-
-        }
-        .adoption-step{
-            width: 60%;
-            height:100%
-        }
-        .step{
-            padding: 5px;
-        }
-        .icon{
-            width:25px;
-            height: 25px;
-        }
-        .a-step{
-            font-size: 20px;
-            font-weight: bold;
-            color: gray;
-        }
-        .adoption-note { margin-top: 20px; font-size: 18px; color: red; }
-        .adoption-condition {
-            background-color: #f2f2f2;
-            border-radius: 20px;
-            width: 40%;
-            min-width: 300px;
-            padding: 25px 30px;
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .adoption-condition:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.25);
-        }
-        .adoption-condition h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-            font-size: 1.5em;
-            letter-spacing: 1px;
-        }
-        .s-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .s-list li {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 15px;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
-            transition: color 0.3s ease;
-        }
-        .s-list li::before {
-            content: "";
-            background-image: url('../../../public/icon/pet-care.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            width: 25px;
-            height: 25px;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%); 
-        }
-        .s-list li:hover {
-            color: #ff6b81; 
-        }
-        .banner-list {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-        }
-        .banner-list img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .banner-list .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.4);
-            z-index: 1;
-        }
-        .banner-list .banner-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-            z-index: 2;
-        }
-        .banner-list .banner-text h1 {
-            font-size: 28px;
-            margin: 0;
-        }
-        .banner-list .banner-text p {
-            font-size: 16px;
-            margin: 5px 0 0 0;
-        }
+}
+.adoption-step{
+    width: 60%;
+    height:100%
+}
+.step{
+    padding: 5px;
+}
+.icon{
+    width:25px;
+    height: 25px;
+}
+.a-step{
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+}
+.adoption-note { margin-top: 20px; font-size: 18px; color: red; }
+.adoption-condition {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    width: 40%;
+    min-width: 300px;
+    padding: 25px 30px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.adoption-condition:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.25);
+}
+.adoption-condition h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+}
+.s-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.s-list li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    transition: color 0.3s ease;
+}
+.s-list li::before {
+    content: "";
+    background-image: url('../../../public/icon/pet-care.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+.s-list li:hover {
+    color: #ff6b81; 
+}
+.banner-list {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+.banner-list img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.banner-list .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+.banner-list .banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 2;
+}
+.banner-list .banner-text h1 {
+    font-size: 28px;
+    margin: 0;
+}
+.banner-list .banner-text p {
+    font-size: 16px;
+    margin: 5px 0 0 0;
+}
 .pets-list {
     display: flex;
     flex-wrap: wrap;

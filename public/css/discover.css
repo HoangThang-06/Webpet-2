@@ -1,16 +1,12 @@
-/* Font Styles */
 .gtc {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
 }
-
 .ttc {
   font-family: "Bebas Neue", sans-serif;
   font-size: 98px;
   letter-spacing: 2px;
 }
-
-/* Button Styles */
 .filter-buttons > button {
   border: 2px solid black;
   border-radius: 3px;
@@ -18,21 +14,15 @@
   color: white;
   margin-right: 10px;
 }
-
 .filter-buttons > button:hover {
   background-color: #143a62;
 }
-
 .filter-buttons > button:visited {
   background-color: #555;
 }
-
-/* Link Styles */
 .t1 {
   text-decoration: none;
 }
-
-/* Post Card Styles */
 .post-card {
   display: flex;
   justify-content: space-between;
@@ -41,27 +31,20 @@
   padding-bottom: 20px;
   margin-bottom: 30px;
   font-family: "Montserrat", sans-serif;
-  font-weight: 700; /* Bold */
+  font-weight: 700;
 }
-
 .post-card:hover {
   color: rgb(8, 177, 250);
 }
-
 .post-card:hover .post-link {
   color: rgb(8, 177, 250);
 }
-
-/* Post List Styles */
 #post-list .col {
   display: none;
 }
-
 #post-list .col.visible {
   display: block;
 }
-
-/* Post Image Styles */
 .post-img {
   width: 160px;
   height: 110px;
@@ -69,36 +52,26 @@
   border-radius: 4px;
   margin-left: 20px;
 }
-
-/* Post Title Styles */
 .post-title {
   font-weight: bold;
   font-size: 20px;
 }
-
-/* Post Link Styles */
 .post-link {
   text-decoration: none;
   color: #0d6efd;
 }
-
 .post-link:hover {
   text-decoration: underline;
 }
-
-/* Post Date Styles */
 .post-date {
   font-size: 14px;
   color: #555;
   margin-bottom: 8px;
 }
-
-/* Load More Button Styles */
 .load-more-wrapper {
   text-align: center;
   margin-top: 20px;
 }
-
 .load-more-btn {
   background: none;
   border: none;
@@ -107,20 +80,16 @@
   font-weight: bold;
   cursor: pointer;
 }
-
 .load-more-btn .plus-icon {
   font-size: 24px;
   margin-right: 6px;
   vertical-align: middle;
 }
-
-/* Custom Horizontal Rule */
 .custom-hr {
   border: none;
   height: 5px;
-  background-color: #007bff; /* Blue */
-  width: 1000px; /* Adjustable length */
-  margin: 20px auto; /* Centered with spacing */
+  background-color: #007bff;
+  width: 1000px;
+  margin: 20px auto;
   border-radius: 2px;
 }
-

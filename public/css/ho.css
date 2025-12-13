@@ -334,12 +334,30 @@ body {
     background: #6c757d;
     color: white;
 }
-
 .btn-secondary:hover {
     background: #5a6268;
 }
+.btn-success {
+    background-color: #27d432;
+    color: #fff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+.btn-success:hover {
+    background-color: #1fa823;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+.btn-danger {
+    background-color: #d42730;
+    color: #fff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
 
-/* Mobile Menu Toggle */
+.btn-danger:hover {
+    background-color: #b21f28;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
 .menu-toggle {
     display: none;
     position: fixed;

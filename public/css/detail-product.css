@@ -180,18 +180,15 @@ body {
     font-weight: bold;
     color: #ff5722;
 }
-
 .stars {
     font-size: 20px;
     color: #ff5722;
 }
-
 .filters {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
-
 .filters button {
     padding: 6px 12px;
     border: 1px solid #ddd;
@@ -201,30 +198,25 @@ body {
     font-size: 14px;
     transition: all 0.2s;
 }
-
 .filters button.active,
 .filters button:hover {
     border-color: #ff5722;
     color: #ff5722;
 }
-
 .review-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-
 .review-item {
     border-top: 1px solid #eee;
     padding-top: 15px;
 }
-
 .review-user {
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
 }
-
 .review-meta {
     display: flex;
     gap: 10px;
@@ -232,7 +224,6 @@ body {
     color: #777;
     margin-bottom: 10px;
 }
-
 .review-text {
     font-size: 15px;
     line-height: 1.6;

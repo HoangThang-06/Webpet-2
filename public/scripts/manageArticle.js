@@ -68,11 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  /* ===== TOGGLE SIDEBAR ===== */
-  $("#toggleBtn").click(function () {
-    $("#sidebar").toggleClass("collapsed");
-  });
-
   // Xử lý nút Xóa bài báo
   $(document).on("click", ".btn-delete", function () {
     if (!confirm("Bạn có chắc chắn muốn xóa bài báo này không?")) return;

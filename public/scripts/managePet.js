@@ -95,11 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
     renderTopPetsChart(state);
   });
 
-  /* ===== TOGGLE SIDEBAR ===== */
-  $("#toggleBtn").click(function () {
-    $("#sidebar").toggleClass("collapsed");
-  });
-
   /* ===== XEM CHI TIẾT PET ===== */
   const petList = document.getElementById("petList");
   const petModal = document.getElementById("viewPetModal");

@@ -38,9 +38,7 @@ foreach ($stats as $row) {
 
 <body>
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
 
     <!-- Nội dung chính -->
     <div class="main-content">
@@ -132,13 +130,6 @@ foreach ($stats as $row) {
         </div>
     </div>
 
-    <script>
-        const monthlyData = <?= json_encode(array_values($monthlyData)); ?>;
-        document.getElementById("toggleBtn").addEventListener("click", function () {
-            document.getElementById("sidebar").classList.toggle("collapsed");
-        });
-
-    </script>
     <script src="../../../public/scripts/home.js"></script>
 </body>
 </html>

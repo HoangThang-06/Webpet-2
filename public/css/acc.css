@@ -2,41 +2,10 @@
    CẤU TRÚC TỔNG – CHỈNH SỬA ĐẸP HƠN
 =================================*/
 
-/* Container tổng chứa sidebar + content */
 .main-container {
   display: flex;
-  padding-left: 260px; /* đẩy nội dung sang phải theo width sidebar */
-  padding-top: 40px;
   background: #f5f7fb;
   min-height: 100vh;
-  transition: 0.3s ease;
-}
-
-/* Khi sidebar thu gọn */
-.sidebar.collapsed + .main-container {
-  padding-left: 90px;
-}
-
-/* ========================
-   SIDEBAR TRÁI – CHUYÊN NGHIỆP
-=========================*/
-.sidebar {
-  width: 240px;
-  background: #111;
-  height: 100vh;
-  padding: 20px 15px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: white;
-  transition: width 0.3s ease;
-  overflow: hidden;
-  z-index: 1000;
-}
-
-/* Sidebar thu gọn */
-.sidebar.collapsed {
-  width: 70px;
 }
 
 /* ========================
@@ -53,7 +22,7 @@
   gap: 50px;
   border: 1px solid #ececec;
   width: 100%;
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto; /* canh giữa */
 }
 
@@ -164,12 +133,6 @@
   .main-container {
     padding-left: 0 !important;
     padding-top: 100px;
-  }
-
-  .sidebar {
-    position: fixed;
-    width: 200px;
-    height: 100%;
   }
 
   .account-box {

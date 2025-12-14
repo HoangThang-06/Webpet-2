@@ -15,9 +15,7 @@
 
 <body>
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
     <!-- MAIN CONTENT -->
     <div class="main-content d-flex" style="gap:20px;">
         <!-- DANH SÁCH PET -->

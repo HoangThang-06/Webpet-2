@@ -27,6 +27,19 @@ class PetDAO{
 
         return $stmt->execute();
     }
+    
+    public function getPetByName($name) {
+        $sql = "SELECT id_pet FROM pet WHERE name_pet = ?";
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) return null;
+
+        $stmt->bind_param("s", $name);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); // null nếu không tồn tại
+    }
+
 
     public function deletePet($id_pet){
         // Lấy đường dẫn ảnh để xóa file

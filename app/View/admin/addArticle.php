@@ -28,9 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="conten">
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
     <div class="container row g-3">
         <!-- Bên trái: Form nhập dữ liệu -->
         <div class="col-md-6">
@@ -135,10 +133,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.getElementById("toggleBtn").addEventListener("click", function () {
-    document.getElementById("sidebar").classList.toggle("collapsed");
-});
-</script>
 </body>
 </html>

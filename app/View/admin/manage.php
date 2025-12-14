@@ -16,9 +16,7 @@ session_start();
 ?>
 <body>
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
 
     <!-- MAIN CONTENT -->
     <div class="main-content">

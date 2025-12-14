@@ -1,0 +1,194 @@
+/* ================================
+   CẤU TRÚC TỔNG – CHỈNH SỬA ĐẸP HƠN
+=================================*/
+
+/* Container tổng chứa sidebar + content */
+.main-container {
+  display: flex;
+  padding-left: 260px; /* đẩy nội dung sang phải theo width sidebar */
+  padding-top: 40px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  transition: 0.3s ease;
+}
+
+/* Khi sidebar thu gọn */
+.sidebar.collapsed + .main-container {
+  padding-left: 90px;
+}
+
+/* ========================
+   SIDEBAR TRÁI – CHUYÊN NGHIỆP
+=========================*/
+.sidebar {
+  width: 240px;
+  background: #111;
+  height: 100vh;
+  padding: 20px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* Sidebar thu gọn */
+.sidebar.collapsed {
+  width: 70px;
+}
+
+/* ========================
+   HỘP TÀI KHOẢN TRUNG TÂM
+=========================*/
+.account-box {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 50px;
+  border: 1px solid #ececec;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto; /* canh giữa */
+}
+
+/* ========================
+   AVATAR
+=========================*/
+.avatar-section {
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-section img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.avatar-section img:hover {
+  transform: scale(1.05);
+  border-color: #7aa7f7;
+}
+
+.change-avatar-btn {
+  background-color: #f0f0f0;
+  padding: 8px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: 0.2s ease;
+}
+
+.change-avatar-btn:hover {
+  background-color: #e6e6e6;
+}
+
+/* ========================
+   FORM BÊN PHẢI
+=========================*/
+.form-section {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 15px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #d4d7dd;
+  background: #f9fafb;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  background: #fff;
+  border-color: #7aa7f7;
+  box-shadow: 0 0 0 3px rgba(122, 167, 247, 0.3);
+}
+
+/* Nút lưu */
+.btn-primary {
+  padding: 12px 24px;
+  background: #7aa7f7;
+  color: white !important;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.25s;
+  grid-column: span 2;
+}
+
+.btn-primary:hover {
+  background: #547cd7;
+}
+
+/* ========================
+   RESPONSIVE
+=========================*/
+@media (max-width: 900px) {
+  .main-container {
+    padding-left: 0 !important;
+    padding-top: 100px;
+  }
+
+  .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+  }
+
+  .account-box {
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+  }
+
+  .avatar-section img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .form-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}

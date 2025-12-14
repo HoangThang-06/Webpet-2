@@ -1,5 +1,6 @@
 <?php
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $type = $_GET['type'] ?? 'all';
 $search = $_GET['search'] ?? '';
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;

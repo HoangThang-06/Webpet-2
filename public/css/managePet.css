@@ -1,0 +1,231 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px;
+  background: #000;
+  min-height: 100%; /* cho cao bằng container */
+  height: auto; /* tự động kéo dài */
+  padding: 20px 15px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#search {
+  border: none !important;
+  border-bottom: 2px solid #ccc !important;
+  border-radius: 0 !important;
+  padding: 6px 8px;
+  font-size: 16px;
+  width: 250px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.25s ease;
+}
+
+/* Khi focus vào input */
+#search:focus {
+  border-bottom: 2px solid #007bff;
+}
+
+/* Gợi ý underline animation */
+#search::placeholder {
+  color: #aaa;
+  transition: 0.2s ease;
+}
+
+#search:focus::placeholder {
+  color: #007bff;
+}
+
+/* Nút tìm kiếm kiểu hiện đại */
+.search-row button {
+  border-radius: 0 !important;
+  border: none;
+  padding: 6px 16px;
+  color: white;
+  background: #007bff;
+  margin-left: 10px;
+  transition: 0.2s;
+}
+
+.search-row button:hover {
+  background: #0056b3;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.right-panel {
+  width: 300px;
+  background-color: #e9ecef;
+  padding: 20px;
+}
+
+.pet-list-wrapper {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.pet-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-item {
+  background: #fff;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pet-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.pet-info {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.pet-list-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+.pet-list-wrapper::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
+.pet-list-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pet-hidden {
+  display: none !important;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-view {
+  background: #0d6efd;
+}
+.btn-edit {
+  background: #198754;
+}
+.btn-delete {
+  background: #dc3545;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+.chart-container {
+  width: 100%;
+  height: 300px;
+}
+
+/* xem chi tiết người dùng */
+.modal {
+  display: none; /* Ẩn modal mặc định */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#viewPetModal img {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px auto 0;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.modal-info {
+  flex: 2;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.modal-avatar {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}

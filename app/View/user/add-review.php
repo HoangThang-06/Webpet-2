@@ -13,7 +13,7 @@ if($order_id == 0){
 }
 $orderItemsSql = "SELECT oi.product_id, p.name, p.image 
                   FROM order_items oi 
-                  JOIN products p ON oi.product_id = p.id
+                  JOIN product p ON oi.product_id = p.id
                   WHERE oi.order_id = ?";
 $stmt = $conn->prepare($orderItemsSql);
 $stmt->bind_param("i", $order_id);

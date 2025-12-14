@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 if (!isset($_SESSION['user']['username'])) {
     header("Location: ../login/login.php");
     exit;

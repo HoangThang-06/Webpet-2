@@ -13,7 +13,7 @@ $cartItems = [];
 $total = 0;
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
-    $sqlProduct = "SELECT id AS product_id, name, price, image FROM products WHERE id = $productId";
+    $sqlProduct = "SELECT id AS product_id, name, price, image FROM product WHERE id = $productId";
     $resultProduct = $conn->query($sqlProduct);
     $product = mysqli_fetch_assoc($resultProduct);
     if ($product) {
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 }
 else {
     $sqlCart = "SELECT c.id AS cart_id,c.quantity,p.id AS product_id,p.name,p.price,p.image
-        FROM cart c JOIN products p ON c.product_id = p.id WHERE c.user_id = $idUser";
+        FROM cart c JOIN product p ON c.product_id = p.id WHERE c.user_id = $idUser";
     $resultCart = $conn->query($sqlCart);
     while ($row = mysqli_fetch_assoc($resultCart)) {
         $cartItems[] = $row;

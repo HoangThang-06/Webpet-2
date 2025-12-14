@@ -1,5 +1,6 @@
 <?php
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $sql = "SELECT d.*, u.fullname 
         FROM donations d 
         JOIN users u ON d.user_id = u.id_user
@@ -16,7 +17,9 @@ $result = $conn->query($sql);
 <link rel="stylesheet" href="../../../public/css/manage_donations.css?v=<?php echo time(); ?>">
 </head>
 <body>
-    <h2>Quản lý giao dịch ủng hộ</h2>
+    <?php include('../layout/menuadmin.php') ;?>
+    <div class="main-content">
+        <h2>Quản lý giao dịch ủng hộ</h2>
     <table>
         <thead>
             <tr>
@@ -50,6 +53,7 @@ $result = $conn->query($sql);
             <?php endwhile; ?>
         </tbody>
     </table>
+    </div>
     <div class="popup-overlay" id="popup">
         <div class="popup-box">
             <img id="popup-img" src="">

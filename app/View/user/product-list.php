@@ -1,12 +1,13 @@
 <?php
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $type = $_GET['type'] ?? 'all';
 $search = $_GET['search'] ?? '';
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 8;
 $start = ($currentPage - 1) * $limit;
-$sqlCount = "SELECT COUNT(id) AS total FROM products WHERE 1=1";
-$sql = "SELECT * FROM products WHERE 1=1";
+$sqlCount = "SELECT COUNT(id) AS total FROM product WHERE 1=1";
+$sql = "SELECT * FROM product WHERE 1=1";
 if ($type != 'all') {
     $typeEsc = mysqli_real_escape_string($conn, $type);
     $sqlCount .= " AND category = '$typeEsc'";

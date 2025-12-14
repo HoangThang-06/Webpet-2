@@ -4,7 +4,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id <= 0) {
     die("Bài viết không hợp lệ.");
 }
-$sql = "SELECT * FROM articles WHERE id_article = $id LIMIT 1";
+$sql = "SELECT * FROM article WHERE id_article = $id LIMIT 1";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     $article = $result->fetch_assoc();
@@ -43,7 +43,7 @@ if ($result && $result->num_rows > 0) {
             <?php
             // Hiển thị 3 bài viết gần đây khác, có ảnh
             $sql_other = "SELECT id_article, title, create_at, image 
-                        FROM articles WHERE id_article != $id ORDER BY create_at DESC LIMIT 3";
+                        FROM article WHERE id_article != $id ORDER BY create_at DESC LIMIT 3";
             $res_other = $conn->query($sql_other);
             if ($res_other && $res_other->num_rows > 0) {
                 while ($row = $res_other->fetch_assoc()) {

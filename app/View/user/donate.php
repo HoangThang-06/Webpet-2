@@ -29,10 +29,8 @@
                 <div class="upload-area" id="uploadSection" style="display:none;">
                     <label>Tải ảnh biên lai lên:</label>
                     <input type="file" name="receipt" id="receipt" accept="image/*">
-
                     <input type="hidden" name="amount" id="hidden_amount">
                     <input type="hidden" name="message" id="hidden_message">
-
                     <button type="button" class="btn-confirm" onclick="confirmTransaction()">
                         Xác nhận giao dịch
                     </button>

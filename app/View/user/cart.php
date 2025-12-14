@@ -18,7 +18,7 @@ $filter = $_GET['filter'] ?? 'all';
 $sqlCart = "
     SELECT c.id AS cart_id, c.quantity, c.create_at, p.name, p.price, p.image
     FROM cart c
-    JOIN products p ON c.product_id = p.id
+    JOIN product p ON c.product_id = p.id
     WHERE c.user_id = ?
 ";
 if ($filter !== 'all') {

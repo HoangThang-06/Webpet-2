@@ -1,8 +1,9 @@
 <?php
-include ('../../controller/dbconnect.php');
-$sqlProductTop = "SELECT * FROM products ORDER BY created_at DESC LIMIT 4";
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
+$sqlProductTop = "SELECT * FROM product ORDER BY created_at DESC LIMIT 4";
 $resultProductTop=$conn->query($sqlProductTop);
-$sqlProduct = "SELECT * FROM products";
+$sqlProduct = "SELECT * FROM product";
 $resultProduct=$conn->query($sqlProduct);
 ?>
 <!DOCTYPE html>

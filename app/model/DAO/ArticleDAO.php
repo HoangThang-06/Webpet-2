@@ -21,7 +21,7 @@ class ArticleDAO{
     }
 
     public function getAllArticles() {
-    $sql = "SELECT * FROM article ORDER BY create_at DESC";
+    $sql = "SELECT * FROM article ";
     $result = $this->conn->query($sql);
 
     $articles = [];
@@ -61,6 +61,42 @@ class ArticleDAO{
     $sql = "UPDATE article SET click = click + 1 WHERE id_article = ?";
     $stmt = $this->conn->prepare($sql);
     $stmt->bind_param("i", $id);
+    return $stmt->execute();
+    }
+
+     // Lấy bài báo có số lượt click cao nhất
+    public function getTopArticle(){
+        $sql = "SELECT * FROM article ORDER BY click DESC LIMIT 1";
+        $result = $this->conn->query($sql);
+
+        if ($result && $result->num_rows > 0){
+            return $result->fetch_assoc();
+        }
+        return null;
+    }
+
+    public function deleteArticle($id) {
+        $stmt = $this->conn->prepare("DELETE FROM article WHERE id_article = ?");
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
+
+    public function updateArticle($data) {
+    $sql = "UPDATE article 
+            SET title = ?, content = ?, image = ?, category = ? 
+            WHERE id_article = ?";
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) return false;
+
+    $stmt->bind_param(
+        "ssssi",
+        $data['title'],
+        $data['content'],
+        $data['image'],
+        $data['category'],
+        $data['id_article']
+    );
+
     return $stmt->execute();
     }
 }

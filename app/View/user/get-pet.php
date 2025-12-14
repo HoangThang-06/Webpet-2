@@ -2,7 +2,15 @@
 session_start();
 require '../../controller/dbconnect.php';
 
-$petId = $_GET['id'] ?? 0;
+$petId = intval($_GET['id'] ?? 0);
+
+if ($petId <= 0) {
+    die("ID thú cưng không hợp lệ!");
+}
+$stmtClick = $conn->prepare("UPDATE pets SET click = click + 1 WHERE id = ?");
+$stmtClick->bind_param("i", $petId);
+$stmtClick->execute();
+$stmtClick->close();
 $stmt = $conn->prepare("SELECT * FROM pets WHERE id = ?");
 $stmt->bind_param("i", $petId);
 $stmt->execute();

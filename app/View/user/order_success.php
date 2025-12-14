@@ -12,7 +12,7 @@ $directProduct = $_POST['direct_product'] ?? null;
 $cartItems = [];
 if ($directProduct !== null) {
     $productId = intval($directProduct);
-    $sql = "SELECT id AS product_id, name, price, quantity FROM products WHERE id = $productId";
+    $sql = "SELECT id AS product_id, name, price, quantity FROM product WHERE id = $productId";
     $result = $conn->query($sql);
     $product = mysqli_fetch_assoc($result);
 

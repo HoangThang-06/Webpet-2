@@ -7,7 +7,7 @@ if (!$resultPets) {
     die("Lỗi SQL pets: " . $conn->error);
 }
 
-$sqlArticle = "SELECT * FROM articles ORDER BY RAND() LIMIT 3";
+$sqlArticle = "SELECT * FROM article ORDER BY RAND() LIMIT 3";
 $resultArticle = $conn->query($sqlArticle);
 if (!$resultArticle) {
     die("Lỗi SQL articles: " . $conn->error);

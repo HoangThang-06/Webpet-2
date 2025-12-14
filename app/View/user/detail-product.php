@@ -2,7 +2,7 @@
 include ('../../controller/dbconnect.php');
 $idProduct = $_GET['id'] ?? 0;
 //lay thong tin sp theo id
-$sqlDetail = "SELECT * FROM products WHERE id = $idProduct";
+$sqlDetail = "SELECT * FROM product WHERE id = $idProduct";
 $resultDetail = $conn->query($sqlDetail);
 $productDetail = mysqli_fetch_assoc($resultDetail);
 //lay so danh gia cua sp
@@ -16,7 +16,7 @@ $emptyStars = 5 - $fullStars;
 $starHTML = str_repeat("⭐", $fullStars) . str_repeat("☆", $emptyStars);
 //lay cac sp lien quan
 $category = $productDetail['category'];
-$sqlRelated = "SELECT * FROM products 
+$sqlRelated = "SELECT * FROM product 
                WHERE category = '$category' AND id != $idProduct
                LIMIT 4";
 $resultRelated = $conn->query($sqlRelated);

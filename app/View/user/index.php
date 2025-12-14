@@ -1,6 +1,7 @@
 <?php
-include('../../controller/dbconnect.php');
-$sql = "SELECT * FROM articles ORDER BY create_at DESC LIMIT 3";
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
+$sql = "SELECT * FROM article ORDER BY create_at DESC LIMIT 3";
 $resultartilce = mysqli_query($conn, $sql);
 if(!$resultartilce){
     die("Query lỗi: " . mysqli_error($conn));

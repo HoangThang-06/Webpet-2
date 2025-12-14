@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $userSession = $_SESSION['user'] ?? null;
 $isLogin = $userSession ? true : false;
 $avatar = "../../../public/img/avatars/avtdefault.png";

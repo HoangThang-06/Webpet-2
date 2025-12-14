@@ -1,6 +1,7 @@
 <?php
 session_start();
-include ('../../controller/dbconnect.php');
+require_once __DIR__."/../../controller/DBConnection.php";
+$conn=(new DBConnection())->getConnection();
 $idUser=$_SESSION['user']['id_user'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['status'])) {
     $orderId = intval($_POST['order_id']);
@@ -70,7 +71,7 @@ $user = mysqli_fetch_assoc($result);
                 $orderResult = $orderQuery->get_result();
                 while ($order = $orderResult->fetch_assoc()):
                     $itemsQuery = $conn->prepare("SELECT oi.quantity, p.name, p.price,p.image FROM order_items oi
-                        JOIN products p ON oi.product_id = p.id
+                        JOIN product p ON oi.product_id = p.id
                         WHERE oi.order_id = ?
                     ");
                     $itemsQuery->bind_param("i", $order['order_id']);

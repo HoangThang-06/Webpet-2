@@ -18,7 +18,6 @@ class Cart
         $this->quantity = $quantity;
         $this->added_at = $added_at;
     }
-
     // Getters
     public function getIdCart() {
         return $this->id_cart;

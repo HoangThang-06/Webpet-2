@@ -26,7 +26,7 @@ if($action==='delete'){
 }
 
 // Lấy thông tin giỏ hàng
-$stmt = $conn->prepare("SELECT c.quantity AS cart_qty, p.quantity AS stock, p.price FROM cart c JOIN products p ON c.product_id=p.id WHERE c.id=? AND c.user_id=?");
+$stmt = $conn->prepare("SELECT c.quantity AS cart_qty, p.quantity AS stock, p.price FROM cart c JOIN product p ON c.product_id=p.id_product WHERE c.id=? AND c.user_id=?");
 $stmt->bind_param("ii",$cart_id,$idUser);
 $stmt->execute();
 $result = $stmt->get_result();

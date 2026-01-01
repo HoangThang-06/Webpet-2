@@ -68,7 +68,6 @@
           <span class="carousel-control-next-icon"></span>
         </button>
       </div>
-
       <div class="container">
         <div class="gioithieu py-5 m-5">
           <h1 class="ttc">Khám Phá</h1>
@@ -80,38 +79,30 @@
             và để mở lòng với những sinh linh đang cần một gia đình.
           </p>
         </div>
-
         <div class="filter-buttons">
           <button type="button" data-value="all" class="active">Tất cả</button>
           <button type="button" data-value="hot">Nổi Bật</button>
           <button type="button" data-value="cm">Chó và Mèo</button>
           <button type="button" data-value="k">Khác</button>
         </div>
-
         <input type="hidden" id="filter-select" value="all" />
-
         <hr class="custom-hr" />
-
         <!--pham tin tuc-->
           <div class="row row-cols-1 row-cols-md-2 g-4" id="post-list">
           <?php 
               require_once __DIR__. '/../../controller/Article_ctr.php';
-
               $articleCtr = new ArticleController();
               $articles = $articleCtr->getAllArticles();
-
               if (!empty($articles)) {
                   foreach ($articles as $row) {
-
                       $id_article = $row['id_article'];
                       $title = htmlspecialchars($row['title']);
                       $date_post = date('d/m/Y', strtotime($row['create_at']));
-                      $image = htmlspecialchars($row['image']);
+                      $image = '/Webpet-2' . $row['image'];
                       $category = htmlspecialchars($row['category']);
                       $click=$row["click"];
                       $link = "articles.php?id=" . $id_article;
                       ?>
-                      
                       <div class="col" data-category="<?= $category ?>" data-click="<?= $click ?>">
                           <a href="<?= $link ?>" class="t1 text-decoration-none">
                               <div class="post-card">
@@ -131,7 +122,6 @@
               }
           ?>
         </div>
-        <!-- NÚT HIỂN THỊ THÊM -->
         <div class="load-more-wrapper pb-5">
           <button id="load-more" class="load-more-btn">
             <span class="plus-icon">+</span> Hiển thị thêm

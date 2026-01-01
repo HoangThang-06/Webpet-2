@@ -12,28 +12,28 @@ $directProduct = $_POST['direct_product'] ?? null;
 $cartItems = [];
 if ($directProduct !== null) {
     $productId = intval($directProduct);
-    $sql = "SELECT id AS product_id, name, price, quantity FROM product WHERE id = $productId";
+    $sql = "SELECT id_product AS product_id, name_product, price, quantity FROM product WHERE id_product = $productId";
     $result = $conn->query($sql);
     $product = mysqli_fetch_assoc($result);
 
     if ($product) {
         if ($product['quantity'] < 1) {
-            die("Sản phẩm '{$product['name']}' hiện đang hết hàng!");
+            die("Sản phẩm '{$product['name_product']}' hiện đang hết hàng!");
         }
         $product['quantity'] = 1;
         $cartItems[] = $product;
     }
 }
 else {
-    $sql = "SELECT c.quantity, p.id AS product_id, p.name, p.price, p.quantity AS stock
+    $sql = "SELECT c.quantity, p.id_product AS product_id, p.name_product, p.price, p.quantity AS stock
             FROM cart c 
-            JOIN products p ON c.product_id = p.id 
+            JOIN product p ON c.product_id = p.id_product 
             WHERE c.user_id = $idUser";
 
     $result = $conn->query($sql);
     while ($row = mysqli_fetch_assoc($result)) {
         if ($row['quantity'] > $row['stock']) {
-            die("Sản phẩm '{$row['name']}' chỉ còn {$row['stock']} trong kho!");
+            die("Sản phẩm '{$row['name_product']}' chỉ còn {$row['stock']} trong kho!");
         }
         $cartItems[] = $row;
     }

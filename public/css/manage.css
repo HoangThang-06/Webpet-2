@@ -5,21 +5,6 @@ body {
   display: flex;
 }
 
-.sidebar {
-  width: 240px;
-  background: #000;
-  min-height: 100%; /* cho cao bằng container */
-  height: auto; /* tự động kéo dài */
-  padding: 20px 15px;
-  transition: width 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.sidebar.collapsed {
-  width: 70px;
-}
-
 .search-row {
   display: flex;
   align-items: center;

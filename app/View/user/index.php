@@ -140,11 +140,21 @@ if(!$resultartilce){
                   $month = date("m", strtotime($article['create_at']));
               ?>
               <div class="news-card">
-                  <img src="<?= htmlspecialchars($article['image']) ?>" alt="<?= htmlspecialchars($article['title']) ?>">
+                  <img src="<?= '/Webpet-2' . htmlspecialchars($article['image']) ?>"" alt="<?= htmlspecialchars($article['title']) ?>">
                   <div class="news-content">
                       <div class="news-date"><?= $date ?><br><small>T<?= $month ?></small></div>
                       <h3><a href="articles.php?id=<?php echo $article['id_article']; ?>"><?= htmlspecialchars($article['title']) ?></a></h3>
-                      <p><?= htmlspecialchars(substr($article['content'], 0, 100)) ?>...</p>
+                      <?php
+                      $contentFile = dirname(__DIR__, 3) . $article['content'];
+                      $preview = 'Không có nội dung';
+                      if (file_exists($contentFile)) {
+                          $text = file_get_contents($contentFile);
+                          $text = strip_tags($text);
+                          $text = preg_replace('/\s+/', ' ', $text);
+                          $preview = mb_substr($text, 0, 100, 'UTF-8') . '...';
+                      }
+                      ?>
+                      <p><?= htmlspecialchars($preview) ?></p>
                   </div>
               </div>
               <?php endwhile; ?>

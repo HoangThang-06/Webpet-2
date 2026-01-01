@@ -31,9 +31,21 @@ if ($result && $result->num_rows > 0) {
             <h1 class="tt"><?= htmlspecialchars($article['title']); ?></h1>
             <p class="b">Ngày đăng: <?= date('d/m/Y', strtotime($article['create_at'])); ?></p>
             <div class="article-content">
-                <?= $article['content'];
-                echo '<br>';
-                echo '<img style="object-fit: cover;width:100%" src="'.$article['image'].'" alt="Anh"> ' ?>
+            <?php
+            $contentPath = dirname(__DIR__, 3) . $article['content'];
+            if (file_exists($contentPath)) {
+                echo nl2br(htmlspecialchars(file_get_contents($contentPath)));
+            } else {
+                echo "<i>Không tìm thấy nội dung bài viết.</i>";
+            }
+            ?>
+            <br>
+
+            <?php if (!empty($article['image'])): ?>
+                <img style="width:100%;object-fit:cover"
+                    src="<?= '/Webpet-2' . htmlspecialchars($article['image']) ?>"
+                    alt="Ảnh bài viết">
+            <?php endif; ?>
             </div>
         </div>
     </div>
@@ -41,14 +53,13 @@ if ($result && $result->num_rows > 0) {
         <div class="ttkhac">
             <a href="discover.php" class="xt"><h3 class="xemthem">Xem Thêm</h3></a>
             <?php
-            // Hiển thị 3 bài viết gần đây khác, có ảnh
             $sql_other = "SELECT id_article, title, create_at, image 
                         FROM article WHERE id_article != $id ORDER BY create_at DESC LIMIT 3";
             $res_other = $conn->query($sql_other);
             if ($res_other && $res_other->num_rows > 0) {
                 while ($row = $res_other->fetch_assoc()) {
                     $link = "articles.php?id=" . $row['id_article'];
-                    $image = htmlspecialchars($row['image']); 
+                     $imageUrl = '/Webpet-2' . $row['image'];
                     ?>
                     <div class="col">
                         <a href="<?= $link ?>" class="t1">
@@ -58,8 +69,8 @@ if ($result && $result->num_rows > 0) {
                                     <div class="post-title"><?= htmlspecialchars($row['title']); ?></div>
                                     <span class="post-link">Đọc thêm</span>
                                 </div>
-                                <?php if($image): ?>
-                                    <img src="<?= $image ?>" alt="<?= htmlspecialchars($row['title']); ?>" class="post-img" />
+                                <?php if($imageUrl): ?>
+                                    <img src="<?= $imageUrl ?>" alt="<?= htmlspecialchars($row['title']); ?>" class="post-img" />
                                 <?php endif; ?>
                             </div>
                         </a>

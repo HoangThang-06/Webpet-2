@@ -1,10 +1,17 @@
+/* Tổng thể */
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+}
+
+/* Thanh tìm kiếm và lọc */
+.search-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 #search {
@@ -19,12 +26,10 @@ body {
   transition: border-color 0.25s ease;
 }
 
-/* Khi focus vào input */
 #search:focus {
   border-bottom: 2px solid #007bff;
 }
 
-/* Gợi ý underline animation */
 #search::placeholder {
   color: #aaa;
   transition: 0.2s ease;
@@ -34,7 +39,6 @@ body {
   color: #007bff;
 }
 
-/* Nút tìm kiếm kiểu hiện đại */
 .search-row button {
   border-radius: 0 !important;
   border: none;
@@ -49,31 +53,30 @@ body {
   background: #0056b3;
 }
 
+/* Nội dung chính */
 .main-content {
   flex: 1;
   padding: 20px;
   background-color: #f8f9fa;
-  overflow: hidden;
 }
 
+/* Right panel (Chart) */
 .right-panel {
   width: 300px;
   background-color: #e9ecef;
   padding: 20px;
 }
 
-.pet-list-wrapper {
-  max-height: calc(100vh - 120px);
+/* Danh sách sản phẩm */
+.product-list {
+  max-height: 670px;
   overflow-y: auto;
-  padding-right: 6px;
 }
 
-.pet-list {
+.product-item {
   display: flex;
-  flex-direction: column;
-}
-
-.pet-item {
+  align-items: center;
+  justify-content: space-between;
   background: #fff;
   padding: 12px 15px;
   border-radius: 10px;
@@ -81,32 +84,34 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.pet-avatar {
+.product-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.product-image {
   width: 80px;
   height: 80px;
-  border-radius: 8px;
+  border-radius: 10px;
   object-fit: cover;
   border: 2px solid #ddd;
 }
 
-.pet-info {
+.product-info {
   font-size: 14px;
   line-height: 1.4;
 }
 
-.pet-list-wrapper::-webkit-scrollbar {
-  width: 6px;
-}
-.pet-list-wrapper::-webkit-scrollbar-thumb {
-  background: #bbb;
-  border-radius: 4px;
-}
-.pet-list-wrapper::-webkit-scrollbar-track {
-  background: transparent;
+.product-info strong {
+  font-size: 15px;
+  color: #333;
 }
 
-.pet-hidden {
-  display: none !important;
+/* Action buttons */
+.product-actions {
+  display: flex;
+  gap: 10px;
 }
 
 .action-btn {
@@ -133,14 +138,15 @@ body {
   opacity: 0.8;
 }
 
+/* Biểu đồ */
 .chart-container {
   width: 100%;
   height: 300px;
 }
 
-/* xem chi tiết người dùng */
+/* Modal Xem/Sửa sản phẩm */
 .modal {
-  display: none; /* Ẩn modal mặc định */
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -149,17 +155,6 @@ body {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-#viewPetModal img {
-  width: 220px;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 15px auto 0;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content {
@@ -193,17 +188,17 @@ body {
   line-height: 1.6;
 }
 
-.modal-avatar {
+.modal-image {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.modal-avatar img {
+.modal-image img {
   width: 120px;
   height: 120px;
-  border-radius: 50%;
+  border-radius: 10px;
   object-fit: cover;
   border: 2px solid #ccc;
 }

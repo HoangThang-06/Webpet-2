@@ -6,7 +6,7 @@ $search = $_GET['search'] ?? '';
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 8;
 $start = ($currentPage - 1) * $limit;
-$sqlCount = "SELECT COUNT(id) AS total FROM product WHERE 1=1";
+$sqlCount = "SELECT COUNT(id_product) AS total FROM product WHERE 1=1";
 $sql = "SELECT * FROM product WHERE 1=1";
 if ($type != 'all') {
     $typeEsc = mysqli_real_escape_string($conn, $type);
@@ -30,11 +30,11 @@ $resultProduct = $conn->query($sql);
 <div class="product-list">
 <?php while($product = mysqli_fetch_assoc($resultProduct)) { ?>
     <div class="product-cardm">
-        <a href="detail-product.php?id=<?= $product['id']; ?>">
-            <img src="<?= $product['image']; ?>" alt="<?= htmlspecialchars($product['name']); ?>">
+        <a href="detail-product.php?id=<?= $product['id_product']; ?>">
+            <img src="<?='/Webpet-2'. $product['image']; ?>" alt="<?= htmlspecialchars($product['name_product']); ?>">
         </a>
-        <a href="detail-product.php?id=<?= $product['id']; ?>" class="title">
-            <?= htmlspecialchars($product['name']); ?>
+        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="title">
+            <?= htmlspecialchars($product['name_product']); ?>
         </a>
         <p class="price"><?= number_format($product['price'], 0, ',', '.'); ?>₫</p>
     </div>

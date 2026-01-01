@@ -2,7 +2,7 @@
 include ('../../controller/dbconnect.php');
 $idProduct = $_GET['id'] ?? 0;
 //lay thong tin sp theo id
-$sqlDetail = "SELECT * FROM product WHERE id = $idProduct";
+$sqlDetail = "SELECT * FROM product WHERE id_product = $idProduct";
 $resultDetail = $conn->query($sqlDetail);
 $productDetail = mysqli_fetch_assoc($resultDetail);
 //lay so danh gia cua sp
@@ -17,7 +17,7 @@ $starHTML = str_repeat("⭐", $fullStars) . str_repeat("☆", $emptyStars);
 //lay cac sp lien quan
 $category = $productDetail['category'];
 $sqlRelated = "SELECT * FROM product 
-               WHERE category = '$category' AND id != $idProduct
+               WHERE category = '$category' AND id_product != $idProduct
                LIMIT 4";
 $resultRelated = $conn->query($sqlRelated);
 ?>
@@ -36,10 +36,10 @@ $resultRelated = $conn->query($sqlRelated);
         <div class="left-content">
             <div class="product-box">
                 <div class="left-image">
-                    <img src="<?php echo $productDetail['image']; ?>" alt="Product Image">
+                    <img src="<?='/Webpet-2'. $productDetail['image']; ?>" alt="Product Image">
                 </div>
                 <div class="right-info">
-                    <div class="product-name"><?php echo $productDetail['name']; ?></div>
+                    <div class="product-name"><?php echo $productDetail['name_product']; ?></div>
                     <div class="rating-box">
                         <div class="rating-stars"><?php echo $starHTML; ?></div>
                         <div class="rating-text">(<?php echo $totalReviews; ?> đánh giá – <?php echo $avgRating; ?>/5)</div>
@@ -82,12 +82,12 @@ $resultRelated = $conn->query($sqlRelated);
             <div class="related-title">Sản phẩm liên quan</div>
             <?php while($row = mysqli_fetch_assoc($resultRelated)) { ?>
                 <div class="related-item">
-                    <a href="detail-product.php?id=<?php echo $row['id']; ?>">
-                        <img src="<?php echo $row['image']; ?>" alt="">
+                    <a href="detail-product.php?id=<?php echo $row['id_product']; ?>">
+                        <img src="<?='/Webpet-2'. $row['image']; ?>" alt="">
                     </a>
                     <div>
-                        <a href="detail-product.php?id=<?php echo $row['id']; ?>">
-                            <p><?php echo $row['name']; ?></p>
+                        <a href="detail-product.php?id=<?php echo $row['id_product']; ?>">
+                            <p><?php echo $row['name_product']; ?></p>
                         </a>
                         <strong><?php echo number_format($row['price']); ?> đ</strong>
                     </div>

@@ -31,9 +31,7 @@ $user = $userCtr->getUserById($_SESSION['user']['id_user']);
 <div class="main-container">
 
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
 
     <div class="account-box">
 

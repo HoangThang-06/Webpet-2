@@ -70,8 +70,8 @@ $user = mysqli_fetch_assoc($result);
                 $orderQuery->execute();
                 $orderResult = $orderQuery->get_result();
                 while ($order = $orderResult->fetch_assoc()):
-                    $itemsQuery = $conn->prepare("SELECT oi.quantity, p.name, p.price,p.image FROM order_items oi
-                        JOIN product p ON oi.product_id = p.id
+                    $itemsQuery = $conn->prepare("SELECT oi.quantity, p.name_product, p.price,p.image FROM order_items oi
+                        JOIN product p ON oi.product_id = p.id_product
                         WHERE oi.order_id = ?
                     ");
                     $itemsQuery->bind_param("i", $order['order_id']);
@@ -96,10 +96,10 @@ $user = mysqli_fetch_assoc($result);
                             <?php while ($item = $itemsResult->fetch_assoc()): ?>
                                 <div class="item">
                                     <div class=item-img>
-                                        <img src="<?= htmlspecialchars($item['image']) ?>" alt=" <?= htmlspecialchars($item['name']) ?>" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                        <img src="<?='/Webpet-2'. $item['image']; ?>" alt=" <?= htmlspecialchars($item['name_product']) ?>" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
                                     </div>
                                     <div class="item-details">
-                                        <div class="item-name"><?= htmlspecialchars($item['name']) ?></div>
+                                        <div class="item-name"><?= htmlspecialchars($item['name_product']) ?></div>
                                         <div class="item-quantity">Số lượng: <?= $item['quantity'] ?></div>
                                     </div>
                                     <div class="item-price"><?= number_format($item['price'], 0, ',', '.') ?>₫</div>

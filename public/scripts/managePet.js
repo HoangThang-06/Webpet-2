@@ -95,11 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
     renderTopPetsChart(state);
   });
 
-  /* ===== TOGGLE SIDEBAR ===== */
-  $("#toggleBtn").click(function () {
-    $("#sidebar").toggleClass("collapsed");
-  });
-
   /* ===== XEM CHI TIẾT PET ===== */
   const petList = document.getElementById("petList");
   const petModal = document.getElementById("viewPetModal");
@@ -160,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let image = $(this).data("image"); // đường dẫn ảnh
 
     $.ajax({
-      url: "/app/controller/PetAPI.php?action=delete",
+      url: "/Webpet-2/app/controller/PetAPI.php?action=delete",
       type: "POST",
       dataType: "json",
       data: {

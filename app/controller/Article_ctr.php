@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__."/../model/DTO/Article.php";
-require_once __DIR__."/../model/DAO/ArticleDAO.php";
-require_once __DIR__."/DBConnection.php";
+require_once __DIR__ . '/../model/DTO/Article.php';
+require_once __DIR__ . '/../model/DAO/ArticleDAO.php';
+require_once __DIR__ . '/DBConnection.php';
 class ArticleController{
 
     private $ArticleDAO;
@@ -11,16 +11,21 @@ class ArticleController{
         $this->ArticleDAO = new ArticleDAO($conn);
     }
 
-    public function addArticle(){
+   public function addArticle(){
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         return "Invalid request!";
     }
 
-    $title = $_POST["title"];
-    $click = 0;
-    $category=$_POST["category"];
+    $title    = trim($_POST["title"]);
+    $category = $_POST["category"];
+    $click    = 0;
 
+    if ($this->ArticleDAO->isTitleExists($title)) {
+        return " Tiêu đề bài báo đã tồn tại!";
+    }
+
+    // KIỂM TRA FILE TXT
     if(!isset($_FILES["conten"]) || $_FILES["conten"]["error"] !== 0){
         return "Lỗi upload file txt!";
     }
@@ -30,7 +35,7 @@ class ArticleController{
         return "Chỉ chấp nhận file TXT";
     }
 
-    // Thư mục PUBLIC (để client truy cập được)
+    // UPLOAD FILE TXT
     $contentFolder = "/public/article/";
     $serverContentFolder = __DIR__ . "/../../public/article/";
 
@@ -38,20 +43,15 @@ class ArticleController{
         mkdir($serverContentFolder, 0777, true);
     }
 
-    // Tên file
     $contentFileName = time() . "_" . $_FILES["conten"]["name"];
-
-    // Đường dẫn server (real path)
     $contentFullPath = $serverContentFolder . $contentFileName;
-
-    // Đường dẫn lưu vào DB (đường dẫn web)
-    $contentDbPath = $contentFolder . $contentFileName;
+    $contentDbPath   = $contentFolder . $contentFileName;
 
     if(!move_uploaded_file($_FILES["conten"]["tmp_name"], $contentFullPath)){
         return "Không thể lưu file TXT!";
     }
 
-    $imageDbPath = "";  // đường dẫn lưu vào DB
+    $imageDbPath = "";
 
     if(isset($_FILES["image"]) && $_FILES["image"]["error"] === 0){
 
@@ -70,9 +70,8 @@ class ArticleController{
         }
 
         $imageFileName = time() . "_" . $_FILES["image"]["name"];
-
-        $imageFullPath = $serverImgFolder . $imageFileName;   // Lưu vào ổ đĩa
-        $imageDbPath   = $imgFolder . $imageFileName;         // Lưu vào database
+        $imageFullPath = $serverImgFolder . $imageFileName;
+        $imageDbPath   = $imgFolder . $imageFileName;
 
         if(!move_uploaded_file($_FILES["image"]["tmp_name"], $imageFullPath)){
             return "Không thể lưu ảnh!";
@@ -81,17 +80,18 @@ class ArticleController{
 
     $article = new ArticleDTO();
     $article->setTitle($title);
-    $article->setContent($contentDbPath); // dùng URL để hiển thị
-    $article->setImage($imageDbPath);     // dùng URL để hiển thị
+    $article->setContent($contentDbPath);
+    $article->setImage($imageDbPath);
     $article->setClick($click);
     $article->setCategory($category);
 
     if ($this->ArticleDAO->addArticle($article)) {
-        return "Thêm bài báo thành công";
+        return "✅ Thêm bài báo thành công";
     } else {
-        return "Lỗi thêm bài báo vào database";
+        return "❌ Lỗi thêm bài báo vào database";
     }
-    }
+}
+
 
     // Hàm lấy tất cả bài báo
     public function getAllArticles() {

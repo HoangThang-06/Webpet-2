@@ -13,7 +13,6 @@ if ($orderId <= 0) {
     die("Đơn hàng không hợp lệ!");
 }
 
-/* ================= LẤY SẢN PHẨM TỪ ĐƠN CŨ ================= */
 $stmt = $conn->prepare("
     SELECT oi.product_id, oi.quantity
     FROM order_items oi
@@ -25,9 +24,7 @@ $result = $stmt->get_result();
 
 $cartItems = [];
 while ($item = $result->fetch_assoc()) {
-
-    // Kiểm tra tồn kho (KHÔNG TRỪ)
-    $stmtCheck = $conn->prepare("SELECT quantity FROM product WHERE id = ?");
+    $stmtCheck = $conn->prepare("SELECT quantity FROM product WHERE id_product = ?");
     $stmtCheck->bind_param("i", $item['product_id']);
     $stmtCheck->execute();
     $stock = $stmtCheck->get_result()->fetch_assoc();
@@ -42,8 +39,6 @@ while ($item = $result->fetch_assoc()) {
 if (empty($cartItems)) {
     die("Không có sản phẩm để mua lại.");
 }
-
-/* ================= TẠO ĐƠN HÀNG MỚI ================= */
 $stmtOrder = $conn->prepare("
     INSERT INTO orders (user_id, payment_method, description, status, created_at)
     VALUES (?, 'COD', ?, 'processing', NOW())
@@ -54,8 +49,6 @@ $stmtOrder->bind_param("is", $idUser, $desc);
 $stmtOrder->execute();
 $newOrderId = $stmtOrder->insert_id;
 $stmtOrder->close();
-
-/* ================= THÊM ORDER ITEMS (KHÔNG TRỪ KHO) ================= */
 $stmtItem = $conn->prepare("
     INSERT INTO order_items (order_id, product_id, quantity)
     VALUES (?, ?, ?)

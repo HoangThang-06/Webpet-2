@@ -77,9 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ===== TOGGLE SIDEBAR ===== */
-  $("#toggleBtn").click(function () {
-    $("#sidebar").toggleClass("collapsed");
-  });
+  // $("#toggleBtn").click(function () {
+  //   $("#sidebar").toggleClass("collapsed");
+  // });
 
   /* ===== XEM CHI TIẾT NGƯỜI DÙNG ===== */
   const employeeList = document.getElementById("employeeList");

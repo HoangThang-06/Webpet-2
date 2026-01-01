@@ -11,9 +11,9 @@ if($order_id == 0){
     echo "Đơn hàng không hợp lệ.";
     exit;
 }
-$orderItemsSql = "SELECT oi.product_id, p.name, p.image 
+$orderItemsSql = "SELECT oi.product_id, p.name_product, p.image 
                   FROM order_items oi 
-                  JOIN product p ON oi.product_id = p.id
+                  JOIN product p ON oi.product_id = p.id_product
                   WHERE oi.order_id = ?";
 $stmt = $conn->prepare($orderItemsSql);
 $stmt->bind_param("i", $order_id);
@@ -59,8 +59,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <?php foreach($products as $product): ?>
         <div class="product-review-card">
             <div class="product-info">
-                <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-                <span class="product-name"><?= htmlspecialchars($product['name']) ?></span>
+                <img src="<?='/Webpet-2'. $product['image']; ?>"alt="<?= htmlspecialchars($product['name_product']) ?>">
+                <span class="product-name"><?= htmlspecialchars($product['name_product']) ?></span>
             </div>
             <div class="rating-select">
                 <label for="rating_<?= $product['product_id'] ?>">Chọn số sao:</label>

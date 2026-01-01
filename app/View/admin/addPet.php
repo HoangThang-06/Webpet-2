@@ -33,9 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="conten">
 
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
 
     <div class="container row g-3">
 
@@ -64,11 +62,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-type"></i></span>
-                                <input type="text" class="form-control" name="name_pet"
+                                <input type="text" class="form-control" name="name"
                                        placeholder="Nhập tên thú cưng" required>
                             </div>
                         </div>
-
+                        <!-- Tuổi -->
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-paw me-1"></i>Tuổi thú cưng
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-123"></i></span>
+                                <input type="text" class="form-control" name="age"
+                                       placeholder="Nhập tuổi thú cưng" required>
+                            </div>
+                        </div>
+                        <!-- Loại -->
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-paw me-1"></i>Loài
+                            </label>
+                            <select name="species" class="form-select" required>
+                                <option value="">-- Chọn loài --</option>
+                                <option value="dog">Chó</option>
+                                <option value="cat">Mèo</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
                         <!-- Giới tính -->
                         <div class="mb-3">
                             <label class="form-label">
@@ -164,12 +184,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-document.getElementById("toggleBtn").addEventListener("click", function () {
-    document.getElementById("sidebar").classList.toggle("collapsed");
-});
-</script>
 
 </body>
 </html>

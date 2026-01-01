@@ -7,21 +7,6 @@ body {
   background: #f4f6f9;
 }
 
-/* SIDEBAR */
-.sidebar {
-  width: 240px;
-  background: #000;
-  min-height: 100vh;
-  padding: 20px 15px;
-  transition: width 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.sidebar.collapsed {
-  width: 70px;
-}
-
 /* MAIN CONTENT */
 .main-content {
   flex: 1;

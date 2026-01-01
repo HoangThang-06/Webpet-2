@@ -20,6 +20,26 @@ class ArticleDAO{
         return $stmt->execute();
     }
 
+    public function isTitleExists($title) {
+        $sql = "SELECT COUNT(*) FROM article WHERE title = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->bind_param("s", $title);
+        $stmt->execute();
+
+        $stmt->bind_result($count);
+        $stmt->fetch();
+
+        $stmt->close();
+
+        return $count > 0;
+    }
+
+
     public function getAllArticles() {
     $sql = "SELECT * FROM article ";
     $result = $this->conn->query($sql);

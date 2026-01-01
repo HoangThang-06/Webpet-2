@@ -13,7 +13,7 @@ $cartItems = [];
 $total = 0;
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
-    $sqlProduct = "SELECT id AS product_id, name, price, image FROM product WHERE id = $productId";
+    $sqlProduct = "SELECT id_product AS product_id, name_product, price, image FROM product WHERE id_product = $productId";
     $resultProduct = $conn->query($sqlProduct);
     $product = mysqli_fetch_assoc($resultProduct);
     if ($product) {
@@ -23,8 +23,8 @@ if (isset($_GET['id'])) {
     }
 }
 else {
-    $sqlCart = "SELECT c.id AS cart_id,c.quantity,p.id AS product_id,p.name,p.price,p.image
-        FROM cart c JOIN product p ON c.product_id = p.id WHERE c.user_id = $idUser";
+    $sqlCart = "SELECT c.id AS cart_id,c.quantity,p.id_product AS product_id,p.name_product,p.price,p.image
+        FROM cart c JOIN product p ON c.product_id = p.id_product WHERE c.user_id = $idUser";
     $resultCart = $conn->query($sqlCart);
     while ($row = mysqli_fetch_assoc($resultCart)) {
         $cartItems[] = $row;
@@ -106,9 +106,9 @@ else {
                  <h2>Tóm tắt đơn hàng</h2>
                 <?php foreach ($cartItems as $item): ?>
                 <div class="cart-item">
-                    <img src="<?= $item['image'] ?>" alt="">
+                    <img src="<?='/Webpet-2'. $item['image'] ?>" alt="">
                     <div class="cart-info">
-                        <h3><?= $item['name'] ?></h3>
+                        <h3><?= $item['name_product'] ?></h3>
                         <p>Số lượng: <?= $item['quantity'] ?></p>
                         <p>Giá: <?= number_format($item['price']) ?>đ</p>
                     </div>
@@ -149,7 +149,7 @@ else {
 
     const total = <?= $total ?>;
     const username = "<?= urlencode($user['fullname']) ?>";
-    const donhang = "<?= urlencode( $item['name']) ?>";
+    const donhang = "<?= urlencode( $item['name_product']) ?>";
 
     paymentRadios.forEach(radio => {
         radio.addEventListener("change", function() {

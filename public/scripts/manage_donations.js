@@ -26,3 +26,4 @@ function updateStatus(id, status) {
         location.reload();
     });
 }
+

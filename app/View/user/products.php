@@ -34,11 +34,11 @@ $resultProduct=$conn->query($sqlProduct);
                 <?php while($productTop = mysqli_fetch_assoc($resultProductTop)){ ?>
                 <div class="product-card">
                     <span class="new-badge">NEW</span>
-                    <a href="detail-product.php?id=<?php echo $productTop['id']; ?>">
-                        <img src="<?php echo $productTop['image']; ?>" alt="<?php echo $productTop['name']; ?>">
+                    <a href="detail-product.php?id=<?php echo $productTop['id_product']; ?>">
+                        <img src="<?='/Webpet-2'. $productTop['image']; ?>" alt="<?php echo $productTop['name_product']; ?>">
                     </a>
                     <div class="info">
-                        <a href="detail-product.php?id=<?php echo $productTop['id']; ?>" class="title"><?php echo $productTop['name']; ?></a>
+                        <a href="detail-product.php?id=<?php echo $productTop['id_product']; ?>" class="title"><?php echo $productTop['name_product']; ?></a>
                         <span class="cheap-badge">Flash Sale</span>
                         <p class="price"><?php echo number_format($productTop['price'], 0, ',', '.'); ?>₫</p>
                     </div>

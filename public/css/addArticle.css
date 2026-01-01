@@ -13,21 +13,6 @@ body {
   width: 100%;
 }
 
-.sidebar {
-  width: 240px;
-  background: #000;
-  min-height: 100%; /* cho cao bằng container */
-  height: auto; /* tự động kéo dài */
-  padding: 20px 15px;
-  transition: width 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.sidebar.collapsed {
-  width: 70px;
-}
-
 /* Khu vực nội dung nằm bên phải */
 .container {
   flex: 1; /* Chiếm toàn bộ phần còn lại */

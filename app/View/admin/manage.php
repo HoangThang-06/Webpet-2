@@ -16,9 +16,7 @@ session_start();
 ?>
 <body>
     <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
         <?php include("../layout/menuadmin.php"); ?>
-    </div>
 
     <!-- MAIN CONTENT -->
     <div class="main-content">
@@ -199,7 +197,6 @@ session_start();
             </form>
         </div>
     </div>
-
     <!-- RIGHT PANEL - BIỂU ĐỒ -->
     <div class="right-panel">
         <?php

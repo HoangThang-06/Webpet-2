@@ -16,9 +16,9 @@ $userResult = $userQuery->get_result();
 $user = $userResult->fetch_assoc();
 $filter = $_GET['filter'] ?? 'all';
 $sqlCart = "
-    SELECT c.id AS cart_id, c.quantity, c.create_at, p.name, p.price, p.image
+    SELECT c.id AS cart_id, c.quantity, c.create_at, p.name_product, p.price, p.image
     FROM cart c
-    JOIN product p ON c.product_id = p.id
+    JOIN product p ON c.product_id = p.id_product
     WHERE c.user_id = ?
 ";
 if ($filter !== 'all') {
@@ -83,10 +83,10 @@ $cartData = $cartStmt->get_result();
                             <div class="order-items">
                                 <div class="item">
                                     <div class="item-img">
-                                        <img src="<?= htmlspecialchars($cartItem['image']) ?>" alt="<?= htmlspecialchars($cartItem['name']) ?>" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
+                                        <img src="<?='/Webpet-2'. $cartItem['image']; ?>" alt="<?= htmlspecialchars($cartItem['name_product']) ?>" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
                                     </div>
                                     <div class="item-details">
-                                        <div class="item-name"><?= htmlspecialchars($cartItem['name']) ?></div>
+                                        <div class="item-name"><?= htmlspecialchars($cartItem['name_product']) ?></div>
                                         <div class="item-quantity-controls">
                                             <button class="btn-qty" data-action="minus" data-id="<?= $cartItem['cart_id'] ?>">-</button>
                                             <input type="number" min="1" value="<?= $cartItem['quantity'] ?>" class="quantity-input" data-id="<?= $cartItem['cart_id'] ?>">

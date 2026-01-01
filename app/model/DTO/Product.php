@@ -4,7 +4,7 @@ class Product
 {
     private $id_product;
     private $name_product;
-    private $id_category;
+    private $category;
     private $price;
     private $quantity;
     private $description;
@@ -12,13 +12,13 @@ class Product
     private $click;
 
     // Constructor
-    public function __construct($id_product = null, $name_product = null, $id_category = null,
+    public function __construct($id_product = null, $name_product = null, $category = null,
                                 $price = null, $quantity = null, $description = null,
                                 $image = null, $click = null) 
     {
         $this->id_product = $id_product;
         $this->name_product = $name_product;
-        $this->id_category = $id_category;
+        $this->category = $category;
         $this->price = $price;
         $this->quantity = $quantity;
         $this->description = $description;
@@ -35,8 +35,8 @@ class Product
         return $this->name_product;
     }
 
-    public function getIdCategory() {
-        return $this->id_category;
+    public function getCategory() {
+        return $this->category;
     }
 
     public function getPrice() {
@@ -68,8 +68,8 @@ class Product
         $this->name_product = $name_product;
     }
 
-    public function setIdCategory($id_category) {
-        $this->id_category = $id_category;
+    public function setCategory($category) {
+        $this->category = $category;
     }
 
     public function setPrice($price) {

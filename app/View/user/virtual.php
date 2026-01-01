@@ -99,7 +99,7 @@ if (!$resultArticle) {
         <div class="articles-wrapper">
             <?php while($article = mysqli_fetch_assoc($resultArticle)){ ?>
                 <div class="article-item">
-                    <img src="<?= $article['image'] ?>" alt="<?= htmlspecialchars($article['title']) ?>">
+                    <img src="<?='/Webpet-2'. $article['image']; ?>" alt="<?= htmlspecialchars($article['title']) ?>">
                     <div class="info-article">
                         <p><?= htmlspecialchars($article['create_at']) ?></p>
                         <a href="articles.php?id=<?php echo $article['id_article']; ?>"><?= htmlspecialchars($article['title']) ?></a>

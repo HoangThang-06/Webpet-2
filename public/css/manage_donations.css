@@ -1,21 +1,16 @@
 * {
     box-sizing: border-box;
 }
-
-/* ===== BODY ===== */
 body {
     font-family: Arial, sans-serif;
     background: #f4f6f8;
     margin: 0;
 }
-
-/* ===== LAYOUT ===== */
 .main-content {
     padding: 30px;
     min-height: 100vh;
     transition: all 0.3s ease;
 }
-
 .right-panel {
     position: fixed;
     top: 0;
@@ -27,8 +22,6 @@ body {
     box-shadow: -2px 0 10px rgba(0,0,0,0.08);
     overflow-y: auto;
 }
-
-/* ===== TITLE ===== */
 h2 {
     font-size: 28px;
     font-weight: 700;
@@ -36,23 +29,27 @@ h2 {
     text-align: center;
     margin-bottom: 25px;
 }
-
 .right-panel h4 {
     text-align: center;
     color: #333;
     margin-bottom: 15px;
 }
-
-/* ===== TABLE ===== */
 table {
-    width: 100%;
+    width: 900px;
     border-collapse: collapse;
     background: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-
+.table-wrapper {
+    width: 880px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 th {
     background: #2c8f8d;
     color: white;
@@ -60,19 +57,108 @@ th {
     text-align: center;
     font-size: 14px;
 }
-
 td {
     padding: 10px;
     border-bottom: 1px solid #eee;
     text-align: center;
     font-size: 14px;
 }
-
 tr:hover {
     background: #f5fafa;
 }
-
-/* ===== BUTTON ===== */
+.chart-filter.year-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 12px 18px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: fit-content;
+    margin-bottom: 25px;
+}
+.filter-label {
+    font-weight: 700;
+    color: #2c8f8d;
+    margin-right: 8px;
+}
+.year-export-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: fit-content;
+    margin: 0 auto 30px;
+}
+.year-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.filter-label {
+    font-weight: 700;
+    color: #2c8f8d;
+    margin-right: 6px;
+}
+.year-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #2c8f8d;
+    background: #ffffff;
+    color: #2c8f8d;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.year-btn:hover {
+    background: #2c8f8d;
+    color: #ffffff;
+}
+.year-btn.active {
+    background: linear-gradient(135deg, #2c8f8d, #38b2ac);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(44,143,141,0.35);
+}
+.btn-export {
+    padding: 9px 18px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #2c8f8d, #38b2ac);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+.btn-export:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(44,143,141,0.35);
+}
+@media (max-width: 768px) {
+    .year-export-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+    .year-tabs {
+        justify-content: center;
+    }
+    .btn-export {
+        width: 100%;
+        justify-content: center;
+    }
+}
 .btn {
     padding: 6px 12px;
     border-radius: 6px;
@@ -82,23 +168,17 @@ tr:hover {
     color: white;
     font-size: 13px;
 }
-
 .approve { background: #28a745; }
 .reject  { background: #dc3545; }
 .view-btn { background: #007bff; }
-
 .btn:hover {
     opacity: 0.9;
 }
-
-/* ===== CHART ===== */
 .chart-container {
     width: 100%;
     max-width: 280px;
     margin: 0 auto 30px;
 }
-
-/* ===== POPUP ===== */
 .popup-overlay {
     position: fixed;
     inset: 0;
@@ -108,7 +188,6 @@ tr:hover {
     align-items: center;
     z-index: 9999;
 }
-
 .popup-box {
     background: white;
     padding: 15px;
@@ -118,13 +197,11 @@ tr:hover {
     text-align: center;
     animation: zoomIn 0.3s ease;
 }
-
 .popup-box img {
     max-width: 100%;
     max-height: 80vh;
     border-radius: 8px;
 }
-
 .close-btn {
     margin-top: 12px;
     padding: 6px 16px;
@@ -134,34 +211,7 @@ tr:hover {
     border-radius: 6px;
     cursor: pointer;
 }
-
 @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1200px) {
-    .right-panel {
-        position: static;
-        width: 100%;
-        height: auto;
-        box-shadow: none;
-        margin-top: 20px;
-    }
-
-    .main-content {
-        margin-left: 250px;
-    }
-}
-
-@media (max-width: 992px) {
-
-    .main-content {
-        margin-left: 0;
-        padding: 20px;
-    }
-    table {
-        font-size: 13px;
-    }
 }

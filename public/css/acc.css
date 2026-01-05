@@ -1,16 +1,11 @@
-/* ================================
-   CẤU TRÚC TỔNG – CHỈNH SỬA ĐẸP HƠN
-=================================*/
-
 .main-container {
   display: flex;
   background: #f5f7fb;
   min-height: 100vh;
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
 }
-
-/* ========================
-   HỘP TÀI KHOẢN TRUNG TÂM
-=========================*/
 .account-box {
   background: #ffffff;
   padding: 30px;
@@ -18,39 +13,31 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: center;
   gap: 50px;
   border: 1px solid #ececec;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto; /* canh giữa */
+  margin: 0;
 }
-
-/* ========================
-   AVATAR
-=========================*/
 .avatar-section {
-  flex: 0 0 350px;
+  flex: 0 0 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .avatar-section img {
-  width: 320px;
-  height: 320px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #ddd;
   margin-bottom: 10px;
   transition: all 0.3s ease;
 }
-
 .avatar-section img:hover {
   transform: scale(1.05);
   border-color: #7aa7f7;
 }
-
 .change-avatar-btn {
   background-color: #f0f0f0;
   padding: 8px 18px;
@@ -60,14 +47,9 @@
   color: #333;
   transition: 0.2s ease;
 }
-
 .change-avatar-btn:hover {
   background-color: #e6e6e6;
 }
-
-/* ========================
-   FORM BÊN PHẢI
-=========================*/
 .form-section {
   flex: 1;
   display: grid;
@@ -106,6 +88,7 @@
   background: #fff;
   border-color: #7aa7f7;
   box-shadow: 0 0 0 3px rgba(122, 167, 247, 0.3);
+  outline: none;
 }
 
 /* Nút lưu */
@@ -125,14 +108,9 @@
 .btn-primary:hover {
   background: #547cd7;
 }
-
-/* ========================
-   RESPONSIVE
-=========================*/
 @media (max-width: 900px) {
   .main-container {
-    padding-left: 0 !important;
-    padding-top: 100px;
+    padding: 20px;
   }
 
   .account-box {
@@ -141,9 +119,10 @@
     padding: 20px;
   }
 
-  .avatar-section img {
-    width: 250px;
-    height: 250px;
+  .avatar-section {
+    width: 100%;
+    max-width: 260px;
+    margin: auto;
   }
 
   .form-section {

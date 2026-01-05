@@ -106,7 +106,7 @@ else {
                  <h2>Tóm tắt đơn hàng</h2>
                 <?php foreach ($cartItems as $item): ?>
                 <div class="cart-item">
-                    <img src="<?='/Webpet-2'. $item['image'] ?>" alt="">
+                    <img src="<?= $item['image'] ?>" alt="">
                     <div class="cart-info">
                         <h3><?= $item['name_product'] ?></h3>
                         <p>Số lượng: <?= $item['quantity'] ?></p>

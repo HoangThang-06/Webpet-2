@@ -83,7 +83,7 @@ $cartData = $cartStmt->get_result();
                             <div class="order-items">
                                 <div class="item">
                                     <div class="item-img">
-                                        <img src="<?='/Webpet-2'. $cartItem['image']; ?>" alt="<?= htmlspecialchars($cartItem['name_product']) ?>" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
+                                        <img src="<?=$cartItem['image']; ?>" alt="<?= htmlspecialchars($cartItem['name_product']) ?>" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
                                     </div>
                                     <div class="item-details">
                                         <div class="item-name"><?= htmlspecialchars($cartItem['name_product']) ?></div>

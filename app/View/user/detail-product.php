@@ -36,7 +36,7 @@ $resultRelated = $conn->query($sqlRelated);
         <div class="left-content">
             <div class="product-box">
                 <div class="left-image">
-                    <img src="<?='/Webpet-2'. $productDetail['image']; ?>" alt="Product Image">
+                    <img src="<?= $productDetail['image']; ?>" alt="Product Image">
                 </div>
                 <div class="right-info">
                     <div class="product-name"><?php echo $productDetail['name_product']; ?></div>
@@ -83,7 +83,7 @@ $resultRelated = $conn->query($sqlRelated);
             <?php while($row = mysqli_fetch_assoc($resultRelated)) { ?>
                 <div class="related-item">
                     <a href="detail-product.php?id=<?php echo $row['id_product']; ?>">
-                        <img src="<?='/Webpet-2'. $row['image']; ?>" alt="">
+                        <img src="<?=$row['image']; ?>" alt="">
                     </a>
                     <div>
                         <a href="detail-product.php?id=<?php echo $row['id_product']; ?>">

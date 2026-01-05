@@ -35,7 +35,7 @@ $resultProduct=$conn->query($sqlProduct);
                 <div class="product-card">
                     <span class="new-badge">NEW</span>
                     <a href="detail-product.php?id=<?php echo $productTop['id_product']; ?>">
-                        <img src="<?='/Webpet-2'. $productTop['image']; ?>" alt="<?php echo $productTop['name_product']; ?>">
+                        <img src="<?= $productTop['image']; ?>" alt="<?php echo $productTop['name_product']; ?>">
                     </a>
                     <div class="info">
                         <a href="detail-product.php?id=<?php echo $productTop['id_product']; ?>" class="title"><?php echo $productTop['name_product']; ?></a>

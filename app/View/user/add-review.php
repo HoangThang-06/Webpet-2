@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <?php foreach($products as $product): ?>
         <div class="product-review-card">
             <div class="product-info">
-                <img src="<?='/Webpet-2'. $product['image']; ?>"alt="<?= htmlspecialchars($product['name_product']) ?>">
+                <img src="<?= $product['image']; ?>"alt="<?= htmlspecialchars($product['name_product']) ?>">
                 <span class="product-name"><?= htmlspecialchars($product['name_product']) ?></span>
             </div>
             <div class="rating-select">

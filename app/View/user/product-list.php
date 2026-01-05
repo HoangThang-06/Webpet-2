@@ -31,7 +31,7 @@ $resultProduct = $conn->query($sql);
 <?php while($product = mysqli_fetch_assoc($resultProduct)) { ?>
     <div class="product-cardm">
         <a href="detail-product.php?id=<?= $product['id_product']; ?>">
-            <img src="<?='/Webpet-2'. $product['image']; ?>" alt="<?= htmlspecialchars($product['name_product']); ?>">
+            <img src="<?= $product['image']; ?>" alt="<?= htmlspecialchars($product['name_product']); ?>">
         </a>
         <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="title">
             <?= htmlspecialchars($product['name_product']); ?>

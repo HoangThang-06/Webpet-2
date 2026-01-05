@@ -320,34 +320,63 @@ table tbody tr:hover {
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
-.chart-filter {
+.chart-filter.year-tabs {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 15px 0 25px 0;
-    font-family: 'Poppins', sans-serif;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 12px 18px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: fit-content;
+    margin-bottom: 25px;
 }
-.chart-filter label {
-    font-size: 18px;
-    font-weight: 600;
+.filter-label {
+    font-weight: 700;
     color: #2c8f8d;
-    border-bottom: 5px solid #2c8f8d;
+    margin-right: 8px;
 }
-.chart-filter select {
-    padding: 8px 15px;
-    font-size: 16px;
-    font-weight: 500;
-    border: 2px solid #2c8f8d;
-    border-radius: 6px;
-    background: #fff;
+.year-export-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: fit-content;
+    margin: 0 auto 30px;
+}
+.year-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.filter-label {
+    font-weight: 700;
+    color: #2c8f8d;
+    margin-right: 6px;
+}
+.year-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #2c8f8d;
+    background: #ffffff;
+    color: #2c8f8d;
+    font-weight: 700;
+    font-size: 14px;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: all 0.25s ease;
 }
-.chart-filter select:hover {
-    border-color: #1e6e6b;
-    background: #f3fdfd;
+.year-btn:hover {
+    background: #2c8f8d;
+    color: #ffffff;
 }
-.chart-filter select:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(44, 143, 141, 0.4);
+.year-btn.active {
+    background: linear-gradient(135deg, #2c8f8d, #38b2ac);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(44,143,141,0.35);
 }

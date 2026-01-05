@@ -96,7 +96,7 @@ $user = mysqli_fetch_assoc($result);
                             <?php while ($item = $itemsResult->fetch_assoc()): ?>
                                 <div class="item">
                                     <div class=item-img>
-                                        <img src="<?='/Webpet-2'. $item['image']; ?>" alt=" <?= htmlspecialchars($item['name_product']) ?>" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                        <img src="<?= $item['image']; ?>" alt=" <?= htmlspecialchars($item['name_product']) ?>" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
                                     </div>
                                     <div class="item-details">
                                         <div class="item-name"><?= htmlspecialchars($item['name_product']) ?></div>

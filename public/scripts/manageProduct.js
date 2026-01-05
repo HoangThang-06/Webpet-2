@@ -193,10 +193,10 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("image_old", currentProduct.image);
 
       if (imageFile) {
-        formData.append("imge", imageFile);
+        formData.append("image", imageFile);
       }
 
-      fetch("/app/controller/ProductAPI.php?action=update", {
+      fetch("/Webpet-2/app/controller/ProductAPI.php?action=update", {
         method: "POST",
         body: formData,
       })

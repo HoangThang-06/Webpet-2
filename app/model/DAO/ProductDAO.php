@@ -75,8 +75,6 @@ class ProductDAO{
 
         return $stmt->execute();
     }
-
-    // Lấy tất cả pet
     public function getAllProduct() {
     $sql = "SELECT * FROM product ORDER BY id_product DESC";
     $stmt = $this->conn->prepare($sql);

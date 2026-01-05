@@ -43,7 +43,7 @@ session_start();
                 echo "<p>Chưa có sản phẩm nào.</p>";
             endif;
             foreach ($products as $prod):
-                $image = "/Webpet-2". $prod["image"];
+                $image = $prod["image"];
                 ?>
                 <div class="product-item" data-name="<?= htmlspecialchars($prod["name_product"]) ?>"
                     data-category="<?= htmlspecialchars($prod["category"]) ?>"
@@ -77,7 +77,8 @@ session_start();
                             data-price="<?= htmlspecialchars($prod["price"]) ?>"
                             data-quantity="<?= htmlspecialchars($prod["quantity"]) ?>"
                             data-description="<?= htmlspecialchars($prod["description"]) ?>"
-                            data-click="<?= htmlspecialchars($prod["click"]) ?>" data-image="<?= $prod["image"] ?>">
+                            data-click="<?= htmlspecialchars($prod["click"]) ?>"
+                            data-image="<?= $prod["image"] ?>">
                             Sửa
                         </button>
                         <button class="action-btn btn-delete" data-id="<?= $prod["id_product"] ?>"

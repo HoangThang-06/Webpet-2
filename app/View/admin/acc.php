@@ -22,7 +22,7 @@ $user = $userCtr->getUserById($_SESSION['user']['id_user']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tài khoản</title>
     <link rel="stylesheet" href="../../../public/css/ho.css">
-    <link rel="stylesheet" href="../../../public/css/acc.css">
+    <link rel="stylesheet" href="../../../public/css/acc.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="../../../public/css/cart.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

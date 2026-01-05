@@ -1,3 +1,20 @@
+<?php
+require_once __DIR__ . "/../../controller/DBConnection.php";
+$conn = (new DBConnection())->getConnection();
+$sql = "SELECT d.*, u.fullname 
+        FROM donations d 
+        JOIN users u ON d.user_id = u.id_user
+        WHERE d.status = 'pending'
+        ORDER BY d.created_at DESC";
+$result = $conn->query($sql);
+$sqlYears = "
+    SELECT DISTINCT YEAR(created_at) AS year
+    FROM donations
+    ORDER BY year DESC
+";
+$resultYears = $conn->query($sqlYears);
+$currentYear = $_GET['year'] ?? date('Y');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,14 +80,15 @@
     <button onclick="openPopup()">Ủng hộ ngay</button>
   </div>
     <div class="chart" style="padding:30px">
-        <div class="chart-filter">
-            <label>Chọn năm:</label>
-            <select id="yearSelect">
-                <option value="2025" selected>2025</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-            </select>
-        </div>
+        <div class="chart-filter year-tabs">
+                <span class="filter-label">Chọn năm:</span>
+                <?php while ($row = $resultYears->fetch_assoc()): ?>
+                    <button class="year-btn <?= ($row['year'] == $currentYear) ? 'active' : '' ?>"
+                        data-year="<?= $row['year'] ?>">
+                        <?= $row['year'] ?>
+                    </button>
+                <?php endwhile; ?>
+            </div>
         <div id="donationContent">
         </div>
     </div>
@@ -98,74 +116,61 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 let monthChart = null;
+let currentYear = <?= json_encode($currentYear) ?>;
+loadDonationReport(currentYear, 1);
+$(document).on('click', '.year-btn', function () {
+    $('.year-btn').removeClass('active');
+    $(this).addClass('active');
+    currentYear = $(this).data('year');
+    loadDonationReport(currentYear, 1);
+});
 function loadDonationReport(year, page = 1) {
     $.get('chartdonation.php', { year: year, page: page }, function (data) {
         $('#donationContent').html(data);
         const canvas = document.getElementById('chartMonth');
-        if (canvas) {
-            const labels = JSON.parse(canvas.dataset.labels);
-            const values = JSON.parse(canvas.dataset.values);
-
-            if (monthChart !== null) {
-                monthChart.destroy();
-            }
-            const ctx = canvas.getContext('2d');
-            monthChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Số tiền ủng hộ (VND)',
-                        data: values,
-                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Tháng',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                },
-                                color: '#2c8f8d'
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Tổng số tiền (VND)',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                },
-                                color: '#2c8f8d'
-                            }
+        if (!canvas) return;
+        const labels = JSON.parse(canvas.dataset.labels);
+        const values = JSON.parse(canvas.dataset.values);
+        if (monthChart) monthChart.destroy();
+        const ctx = canvas.getContext('2d');
+        monthChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Số tiền ủng hộ (VND)',
+                    data: values,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tháng',
+                            font: { size: 14, weight: 'bold' }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Tổng số tiền (VND)',
+                            font: { size: 14, weight: 'bold' }
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     });
 }
-loadDonationReport($('#yearSelect').val());
-
-$('#yearSelect').on('change', function () {
-    loadDonationReport($(this).val());
-});
-
 $(document).on('click', '.page-link', function (e) {
     e.preventDefault();
-    const page = $(this).data('page');
-    const year = $('#yearSelect').val();
-    loadDonationReport(year, page);
+    loadDonationReport(currentYear, $(this).data('page'));
 });
 </script>
 </body>

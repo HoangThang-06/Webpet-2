@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../../../public/css/home.css" />   
+    <link rel="stylesheet" href="../../../public/css/home.css?v=<?php echo time();?> " />   
 </head>
 <?php
 session_start();
@@ -34,7 +34,7 @@ foreach ($stats as $row) {
         <div class="content">
             <div class="title-desc">
             <h1>BẢNG ĐIỀU KHIỂN ADMIN</h1>
-                Quản lý toàn bộ nội dung và dữ liệu của hệ thống tại một nơi duy nhất.
+                <p>Quản lý toàn bộ nội dung và dữ liệu của hệ thống tại một nơi duy nhất.
                 Theo dõi thống kê, cập nhật thông tin và tối ưu hoạt động website nhanh chóng.
             </p>
             </div>
